@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MinhaGrana — Organize as finanças da sua família</title>
+  <meta name="description" content="MinhaGrana é uma aplicação completa de gestão financeira e organização familiar: despesas, recorrentes, carteira, membros, lista de compras, agenda, tarefas e Assistente AI." />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              emerald: {
+                50: '#ECFDF5',
+                100: '#D1FAE5',
+                500: '#10B981',
+                600: '#0EA5A8' // usaremos como teal/emerald mix para gradiente
+              },
+              teal: {
+                600: '#0D9488'
+              },
+            },
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="MinhaGrana-optimized.svg">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10B981">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="MinhaGrana">
+  <link rel="apple-touch-icon" href="favicon-180x180.png">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID', {
+      page_title: 'MinhaGrana - Landing Page',
+      page_location: window.location.href,
+      custom_map: {
+        'custom_parameter_1': 'lead_source'
+      }
+    });
+  </script>
+
+  <style>
+    .container-lg{max-width:110rem}
+    .glass{backdrop-filter:saturate(180%) blur(10px); background:rgba(255,255,255,.55)}
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- Top Bar -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg flex items-center justify-between h-16">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 grid place-content-center">
+          <img src="MinhaGrana-optimized.svg" alt="MinhaGrana" class="h-6 w-6 text-white" />
+        </div>
+        <span class="font-semibold">MinhaGrana</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600">
+        <a href="#beneficios" class="hover:text-slate-900">Benefícios</a>
+        <a href="#como-funciona" class="hover:text-slate-900">Como funciona</a>
+        <a href="#publicos" class="hover:text-slate-900">Para quem</a>
+        <a href="#recursos" class="hover:text-slate-900">Recursos</a>
+        <a href="#interesse" class="px-4 py-2 rounded-lg text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow hover:opacity-90">Quero conhecer</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 opacity-70 bg-gradient-to-b from-emerald-50 to-teal-50"></div>
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+          Controle financeiro <span class="text-emerald-600">simples</span>,
+          colaboração <span class="text-teal-600">real</span>.
+        </h1>
+        <p class="mt-5 text-lg text-slate-600 max-w-2xl">
+          O MinhaGrana une despesas, carteira, membros, lista de compras, agenda, tarefas e um Assistente AI em uma interface moderna para indivíduos, famílias e empresas.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#interesse" id="hero-cta-button" class="px-6 py-3 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow hover:opacity-90">Quero usar na prática</a>
+          <a href="#beneficios" class="px-6 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-white">Ver benefícios</a>
+        </div>
+        <dl class="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm">
+          <div class="p-4 rounded-xl bg-white border border-slate-200">
+            <dt class="text-slate-500">Economia média</dt>
+            <dd class="mt-1 font-semibold">até 20%/mês</dd>
+          </div>
+          <div class="p-4 rounded-xl bg-white border border-slate-200">
+            <dt class="text-slate-500">Lançamentos/mês</dt>
+            <dd class="mt-1 font-semibold">10k+ processados</dd>
+          </div>
+          <div class="p-4 rounded-xl bg-white border border-slate-200">
+            <dt class="text-slate-500">Satisfação</dt>
+            <dd class="mt-1 font-semibold">NPS 84</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="relative">
+        <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-teal-600/10 rounded-3xl"></div>
+        <div class="relative bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
+          <!-- Mockup interativo -->
+          <div class="grid gap-4">
+            <!-- Dashboard Principal -->
+            <div class="rounded-2xl border border-slate-200 p-4 bg-gradient-to-br from-emerald-50 to-teal-50">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="font-semibold text-emerald-800">Dashboard Financeiro</h3>
+                <span class="text-xs text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">Saldo +R$ 842</span>
+              </div>
+              <div class="h-3 rounded-full bg-slate-200 overflow-hidden">
+                <div class="h-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 w-3/4 transition-all duration-1000"></div>
+              </div>
+              <div class="mt-3 grid grid-cols-2 gap-3 text-sm">
+                <div class="bg-white/60 rounded-lg p-2">
+                  <div class="text-emerald-700 font-semibold">R$ 7.200</div>
+                  <div class="text-slate-600">Receitas</div>
+                </div>
+                <div class="bg-white/60 rounded-lg p-2">
+                  <div class="text-red-600 font-semibold">R$ 6.358</div>
+                  <div class="text-slate-600">Despesas</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Categorias -->
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <h3 class="font-semibold mb-3 text-slate-800">Gastos por Categoria</h3>
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-indigo-500"></div>
+                    <span class="text-sm">Moradia</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div class="h-2 bg-indigo-500 rounded-full w-3/4"></div>
+                    </div>
+                    <span class="text-sm font-medium">34%</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                    <span class="text-sm">Mercado</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div class="h-2 bg-blue-500 rounded-full w-2/3"></div>
+                    </div>
+                    <span class="text-sm font-medium">27%</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-orange-500"></div>
+                    <span class="text-sm">Transporte</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div class="h-2 bg-orange-500 rounded-full w-1/3"></div>
+                    </div>
+                    <span class="text-sm font-medium">11%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assistente AI -->
+            <div class="rounded-2xl border border-slate-200 p-4 bg-gradient-to-br from-purple-50 to-pink-50">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                  <span class="text-white text-xs">🤖</span>
+                </div>
+                <h3 class="font-semibold text-purple-800">Assistente AI</h3>
+              </div>
+              <div class="bg-white/60 rounded-lg p-3 text-sm">
+                <div class="flex items-start gap-2">
+                  <div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
+                  <div>
+                    <p class="text-slate-700">"Pedro paga <span class="font-semibold text-emerald-600">R$ 120</span> para Ana"</p>
+                    <p class="text-xs text-slate-500 mt-1">Saldos equilibrados automaticamente</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lista de Compras -->
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <h3 class="font-semibold mb-3 text-slate-800">Lista de Compras</h3>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 text-sm">
+                  <div class="w-4 h-4 rounded border-2 border-emerald-500 bg-emerald-500 flex items-center justify-center">
+                    <span class="text-white text-xs">✓</span>
+                  </div>
+                  <span class="line-through text-slate-500">Leite</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <div class="w-4 h-4 rounded border-2 border-slate-300"></div>
+                  <span>Pão</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <div class="w-4 h-4 rounded border-2 border-slate-300"></div>
+                  <span>Ovos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefícios principais -->
+  <section id="beneficios" class="py-16 lg:py-24">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-bold">Por que o MinhaGrana?</h2>
+        <p class="mt-3 text-slate-600">Transparência, organização e decisões melhores com dados claros e colaboração em tempo real.</p>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+          <div class="h-10 w-10 grid place-content-center rounded-lg bg-emerald-100 text-emerald-700 mb-3">✓</div>
+          <h3 class="font-semibold">Controle total das despesas</h3>
+          <p class="mt-2 text-sm text-slate-600">Lançamentos detalhados, divisão inteligente por pessoa/percentual e histórico de alterações.</p>
+        </div>
+        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+          <div class="h-10 w-10 grid place-content-center rounded-lg bg-blue-100 text-blue-700 mb-3">ℹ</div>
+          <h3 class="font-semibold">Insights que viram ação</h3>
+          <p class="mt-2 text-sm text-slate-600">Dashboard com gastos por categoria, projeções e cálculo automático de acertos.</p>
+        </div>
+        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+          <div class="h-10 w-10 grid place-content-center rounded-lg bg-purple-100 text-purple-700 mb-3">🤖</div>
+          <h3 class="font-semibold">Assistente AI</h3>
+          <p class="mt-2 text-sm text-slate-600">Crie despesas, tarefas, eventos e mais via chat. Comportamento personalizável por prompt.</p>
+        </div>
+        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+          <div class="h-10 w-10 grid place-content-center rounded-lg bg-orange-100 text-orange-600 mb-3">🛒</div>
+          <h3 class="font-semibold">Lista de compras colaborativa</h3>
+          <p class="mt-2 text-sm text-slate-600">Todos adicionam/checagem em tempo real. Nada fica para trás.</p>
+        </div>
+        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+          <div class="h-10 w-10 grid place-content-center rounded-lg bg-emerald-100 text-emerald-700 mb-3">👥</div>
+          <h3 class="font-semibold">Membros e avatares</h3>
+          <p class="mt-2 text-sm text-slate-600">Cores únicas por membro, convites fáceis e redistribuição automática ao remover alguém.</p>
+        </div>
+        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
+          <div class="h-10 w-10 grid place-content-center rounded-lg bg-red-100 text-red-600 mb-3">⚠</div>
+          <h3 class="font-semibold">Recorrentes sem surpresas</h3>
+          <p class="mt-2 text-sm text-slate-600">Agenda de ocorrências, processamento em 1 clique e projeção futura no painel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section id="como-funciona" class="py-16 lg:py-24 bg-white border-y border-slate-200">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <h2 class="text-3xl font-bold">Como funciona</h2>
+      <ol class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <h3 class="font-semibold">1) Cadastre sua família</h3>
+          <p class="mt-2 text-slate-600">Crie perfis, cores/avatares e permissões.</p>
+        </li>
+        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <h3 class="font-semibold">2) Lance receitas e despesas</h3>
+          <p class="mt-2 text-slate-600">Detalhe quem pagou, categorias e divisão.</p>
+        </li>
+        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <h3 class="font-semibold">3) Veja o painel e projeções</h3>
+          <p class="mt-2 text-slate-600">Gráficos, tendências e acertos sugeridos.</p>
+        </li>
+        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
+          <h3 class="font-semibold">4) Automação com AI</h3>
+          <p class="mt-2 text-slate-600">Peça no chat: "crie despesa mercado R$200 amanhã".</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Públicos / Casos de uso -->
+  <section id="publicos" class="py-16 lg:py-24">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <h2 class="text-3xl font-bold">Feito para você</h2>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <!-- Individual -->
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-semibold text-lg">Pessoas (uso individual)</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700 list-disc list-inside">
+            <li>Controle de rendimentos e despesas em um só lugar.</li>
+            <li>Gráfico de balanço pessoal e modo "ocultar valores".</li>
+            <li>Categorias personalizadas e metas por categoria.</li>
+          </ul>
+        </div>
+        <!-- Família -->
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-semibold text-lg">Famílias</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700 list-disc list-inside">
+            <li>Divisão flexível: igual, por percentual ou valores fixos.</li>
+            <li>Acerto automático entre membros.</li>
+            <li>Lista de compras, agenda e tarefas compartilhadas.</li>
+          </ul>
+        </div>
+        <!-- Empresas / Educação financeira -->
+        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
+          <h3 class="font-semibold text-lg">Empresas & Educação Financeira</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700 list-disc list-inside">
+            <li>Programas de bem‑estar financeiro para equipes.</li>
+            <li>Conteúdos e exercícios guiados pelo Assistente AI.</li>
+            <li>Organização de turmas, eventos e trilhas temáticas.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recursos principais -->
+  <section id="recursos" class="py-16 lg:py-24 bg-white border-y border-slate-200">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <h2 class="text-3xl font-bold">Recursos que fazem diferença</h2>
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Despesas</strong>: título, valor, categoria, quem pagou, data e histórico.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Recorrentes</strong>: frequência, número de ocorrências e processamento em 1 clique.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Minha carteira</strong>: rendimentos e balanço pessoal com comparativos.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Membros</strong>: convites, avatares coloridos e redistribuição automática.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Agenda</strong>: mensal, semanal e lista com lembretes.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Anotações & Tarefas</strong>: colaboração, categorias e vínculo a despesas.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Assistente AI</strong>: atua com contexto do sistema; prompt personalizável.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Histórico & Auditoria</strong>: rastreabilidade total de ações.</div>
+        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Fuso horário São Paulo</strong>: datas consistentes para toda a equipe.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vídeos Explicativos -->
+  <section class="py-16 lg:py-24 bg-gradient-to-br from-slate-50 to-white">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">Veja como funciona</h2>
+        <p class="mt-3 text-slate-600">Tutoriais em vídeo para você dominar o MinhaGrana</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Vídeo 1 - Introdução -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="relative">
+            <div class="aspect-video bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-white/80 rounded-full mx-auto mb-3 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform" onclick="openVideoModal('intro')">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="#10B981"/>
+                  </svg>
+                </div>
+                <p class="text-sm text-slate-600">2:30 min</p>
+              </div>
+            </div>
+            <div class="absolute top-3 left-3 bg-emerald-500 text-white px-2 py-1 rounded text-xs font-medium">
+              Básico
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-semibold text-lg mb-2">Introdução ao MinhaGrana</h3>
+            <p class="text-slate-600 text-sm mb-4">Conheça as principais funcionalidades e como começar a usar a plataforma.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500">Visualizações: 1.2k</span>
+              <button onclick="openVideoModal('intro')" class="text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                Assistir →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vídeo 2 - Configuração -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="relative">
+            <div class="aspect-video bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-white/80 rounded-full mx-auto mb-3 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform" onclick="openVideoModal('setup')">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="#3B82F6"/>
+                  </svg>
+                </div>
+                <p class="text-sm text-slate-600">4:15 min</p>
+              </div>
+            </div>
+            <div class="absolute top-3 left-3 bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium">
+              Intermediário
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-semibold text-lg mb-2">Configuração Inicial</h3>
+            <p class="text-slate-600 text-sm mb-4">Aprenda a configurar categorias, membros da família e suas primeiras despesas.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500">Visualizações: 856</span>
+              <button onclick="openVideoModal('setup')" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                Assistir →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vídeo 3 - Assistente AI -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="relative">
+            <div class="aspect-video bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-white/80 rounded-full mx-auto mb-3 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform" onclick="openVideoModal('ai')">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="#8B5CF6"/>
+                  </svg>
+                </div>
+                <p class="text-sm text-slate-600">3:45 min</p>
+              </div>
+            </div>
+            <div class="absolute top-3 left-3 bg-purple-500 text-white px-2 py-1 rounded text-xs font-medium">
+              Avançado
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-semibold text-lg mb-2">Assistente AI</h3>
+            <p class="text-slate-600 text-sm mb-4">Descubra como usar a inteligência artificial para automatizar tarefas e obter insights.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500">Visualizações: 642</span>
+              <button onclick="openVideoModal('ai')" class="text-purple-600 hover:text-purple-700 text-sm font-medium">
+                Assistir →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vídeo 4 - Relatórios -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="relative">
+            <div class="aspect-video bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-white/80 rounded-full mx-auto mb-3 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform" onclick="openVideoModal('reports')">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="#10B981"/>
+                  </svg>
+                </div>
+                <p class="text-sm text-slate-600">5:20 min</p>
+              </div>
+            </div>
+            <div class="absolute top-3 left-3 bg-green-500 text-white px-2 py-1 rounded text-xs font-medium">
+              Intermediário
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-semibold text-lg mb-2">Relatórios e Análises</h3>
+            <p class="text-slate-600 text-sm mb-4">Aprenda a interpretar gráficos e relatórios para tomar melhores decisões financeiras.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500">Visualizações: 734</span>
+              <button onclick="openVideoModal('reports')" class="text-green-600 hover:text-green-700 text-sm font-medium">
+                Assistir →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vídeo 5 - Lista de Compras -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="relative">
+            <div class="aspect-video bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-white/80 rounded-full mx-auto mb-3 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform" onclick="openVideoModal('shopping')">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="#F97316"/>
+                  </svg>
+                </div>
+                <p class="text-sm text-slate-600">2:50 min</p>
+              </div>
+            </div>
+            <div class="absolute top-3 left-3 bg-orange-500 text-white px-2 py-1 rounded text-xs font-medium">
+              Básico
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-semibold text-lg mb-2">Lista de Compras Colaborativa</h3>
+            <p class="text-slate-600 text-sm mb-4">Veja como criar e compartilhar listas de compras com toda a família.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500">Visualizações: 923</span>
+              <button onclick="openVideoModal('shopping')" class="text-orange-600 hover:text-orange-700 text-sm font-medium">
+                Assistir →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vídeo 6 - Dicas Avançadas -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="relative">
+            <div class="aspect-video bg-gradient-to-br from-slate-100 to-gray-100 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-white/80 rounded-full mx-auto mb-3 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform" onclick="openVideoModal('tips')">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5V19L19 12L8 5Z" fill="#64748B"/>
+                  </svg>
+                </div>
+                <p class="text-sm text-slate-600">6:10 min</p>
+              </div>
+            </div>
+            <div class="absolute top-3 left-3 bg-slate-500 text-white px-2 py-1 rounded text-xs font-medium">
+              Avançado
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-semibold text-lg mb-2">Dicas e Truques</h3>
+            <p class="text-slate-600 text-sm mb-4">Funcionalidades avançadas e dicas para maximizar sua produtividade.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500">Visualizações: 1.1k</span>
+              <button onclick="openVideoModal('tips')" class="text-slate-600 hover:text-slate-700 text-sm font-medium">
+                Assistir →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA para Canal -->
+      <div class="text-center mt-12">
+        <p class="text-slate-600 mb-4">Mais de 50 vídeos disponíveis no nosso canal</p>
+        <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white bg-gradient-to-r from-red-500 to-pink-600 shadow-lg hover:opacity-90 transition-all">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          <span>Inscrever-se no Canal</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de Vídeo -->
+  <div id="videoModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+      <div class="flex items-center justify-between p-6 border-b border-slate-200">
+        <h3 id="videoTitle" class="text-xl font-semibold">Título do Vídeo</h3>
+        <button onclick="closeVideoModal()" class="text-slate-500 hover:text-slate-700 text-2xl">×</button>
+      </div>
+      <div class="aspect-video bg-slate-900 flex items-center justify-center">
+        <div class="text-center text-white">
+          <div class="w-20 h-20 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5V19L19 12L8 5Z"/>
+            </svg>
+          </div>
+          <p class="text-lg mb-2">Vídeo em breve</p>
+          <p class="text-sm text-slate-300">Estamos preparando conteúdo exclusivo para você</p>
+        </div>
+      </div>
+      <div class="p-6">
+        <p id="videoDescription" class="text-slate-600">Descrição do vídeo será exibida aqui.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screenshots do Produto -->
+  <section class="py-16 lg:py-24 bg-slate-50">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">Veja o MinhaGrana em ação</h2>
+        <p class="mt-3 text-slate-600">Interface intuitiva e funcionalidades poderosas</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Screenshot 1 - Dashboard -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+          <div class="h-48 bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">📊</span>
+              </div>
+              <h3 class="font-semibold text-slate-800">Dashboard</h3>
+              <p class="text-sm text-slate-600">Visão geral das finanças</p>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-slate-600">Controle total das receitas, despesas e saldos em tempo real</p>
+          </div>
+        </div>
+
+        <!-- Screenshot 2 - Despesas -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+          <div class="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">💳</span>
+              </div>
+              <h3 class="font-semibold text-slate-800">Despesas</h3>
+              <p class="text-sm text-slate-600">Lançamentos detalhados</p>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-slate-600">Categorize e acompanhe todos os seus gastos</p>
+          </div>
+        </div>
+
+        <!-- Screenshot 3 - Assistente AI -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+          <div class="h-48 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">🤖</span>
+              </div>
+              <h3 class="font-semibold text-slate-800">Assistente AI</h3>
+              <p class="text-sm text-slate-600">Inteligência artificial</p>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-slate-600">Automatize tarefas e receba insights personalizados</p>
+          </div>
+        </div>
+
+        <!-- Screenshot 4 - Lista de Compras -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+          <div class="h-48 bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">🛒</span>
+              </div>
+              <h3 class="font-semibold text-slate-800">Lista de Compras</h3>
+              <p class="text-sm text-slate-600">Colaborativa</p>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-slate-600">Compartilhe listas com toda a família</p>
+          </div>
+        </div>
+
+        <!-- Screenshot 5 - Relatórios -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+          <div class="h-48 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">📈</span>
+              </div>
+              <h3 class="font-semibold text-slate-800">Relatórios</h3>
+              <p class="text-sm text-slate-600">Análises detalhadas</p>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-slate-600">Gráficos e insights para decisões inteligentes</p>
+          </div>
+        </div>
+
+        <!-- Screenshot 6 - Mobile -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+          <div class="h-48 bg-gradient-to-br from-slate-100 to-gray-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-slate-500 to-gray-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">📱</span>
+              </div>
+              <h3 class="font-semibold text-slate-800">Mobile</h3>
+              <p class="text-sm text-slate-600">Acesso em qualquer lugar</p>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-slate-600">PWA responsivo para iOS e Android</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA para Demo -->
+      <div class="text-center mt-12">
+        <a href="#interesse" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg hover:opacity-90 transition-all">
+          <span>Ver Demo Completa</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Integrado -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">Blog MinhaGrana</h2>
+        <p class="mt-3 text-slate-600">Dicas, tutoriais e insights sobre educação financeira</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Artigo 1 -->
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="aspect-video bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-emerald-500 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">💰</span>
+              </div>
+              <p class="text-sm text-slate-600">5 min de leitura</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded text-xs font-medium">Educação Financeira</span>
+              <span class="text-xs text-slate-500">2 dias atrás</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Como criar um orçamento familiar eficiente</h3>
+            <p class="text-slate-600 text-sm mb-4">Aprenda estratégias práticas para organizar as finanças da sua família e alcançar suas metas financeiras.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full"></div>
+                <span class="text-xs text-slate-600">Equipe MinhaGrana</span>
+              </div>
+              <a href="#" class="text-emerald-600 hover:text-emerald-700 text-sm font-medium">Ler mais →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artigo 2 -->
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="aspect-video bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-500 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">📊</span>
+              </div>
+              <p class="text-sm text-slate-600">7 min de leitura</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">Tutoriais</span>
+              <span class="text-xs text-slate-500">1 semana atrás</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">10 dicas para economizar no supermercado</h3>
+            <p class="text-slate-600 text-sm mb-4">Descubra como usar a lista de compras colaborativa do MinhaGrana para reduzir gastos em até 30%.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
+                <span class="text-xs text-slate-600">Ana Costa</span>
+              </div>
+              <a href="#" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Ler mais →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artigo 3 -->
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="aspect-video bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-purple-500 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">🤖</span>
+              </div>
+              <p class="text-sm text-slate-600">4 min de leitura</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-medium">IA</span>
+              <span class="text-xs text-slate-500">2 semanas atrás</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Como o Assistente AI pode revolucionar suas finanças</h3>
+            <p class="text-slate-600 text-sm mb-4">Entenda como a inteligência artificial do MinhaGrana pode automatizar tarefas e fornecer insights valiosos.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full"></div>
+                <span class="text-xs text-slate-600">Tech Team</span>
+              </div>
+              <a href="#" class="text-purple-600 hover:text-purple-700 text-sm font-medium">Ler mais →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artigo 4 -->
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="aspect-video bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-green-500 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">🎯</span>
+              </div>
+              <p class="text-sm text-slate-600">6 min de leitura</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">Metas</span>
+              <span class="text-xs text-slate-500">3 semanas atrás</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Definindo metas financeiras realistas para 2024</h3>
+            <p class="text-slate-600 text-sm mb-4">Aprenda a criar e acompanhar metas financeiras usando as ferramentas do MinhaGrana.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+                <span class="text-xs text-slate-600">João Santos</span>
+              </div>
+              <a href="#" class="text-green-600 hover:text-green-700 text-sm font-medium">Ler mais →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artigo 5 -->
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="aspect-video bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-orange-500 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">👨‍👩‍👧‍👦</span>
+              </div>
+              <p class="text-sm text-slate-600">8 min de leitura</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-medium">Família</span>
+              <span class="text-xs text-slate-500">1 mês atrás</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Ensinando educação financeira para crianças</h3>
+            <p class="text-slate-600 text-sm mb-4">Dicas práticas para introduzir conceitos financeiros de forma divertida e educativa para os pequenos.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-orange-500 to-red-600 rounded-full"></div>
+                <span class="text-xs text-slate-600">Maria Silva</span>
+              </div>
+              <a href="#" class="text-orange-600 hover:text-orange-700 text-sm font-medium">Ler mais →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Artigo 6 -->
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden hover-lift">
+          <div class="aspect-video bg-gradient-to-br from-slate-100 to-gray-100 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-slate-500 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                <span class="text-white text-2xl">📈</span>
+              </div>
+              <p class="text-sm text-slate-600">5 min de leitura</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-medium">Investimentos</span>
+              <span class="text-xs text-slate-500">1 mês atrás</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">Primeiros passos no mundo dos investimentos</h3>
+            <p class="text-slate-600 text-sm mb-4">Guia básico para começar a investir com segurança e responsabilidade financeira.</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-gradient-to-r from-slate-500 to-gray-600 rounded-full"></div>
+                <span class="text-xs text-slate-600">Carlos Lima</span>
+              </div>
+              <a href="#" class="text-slate-600 hover:text-slate-700 text-sm font-medium">Ler mais →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- CTA para Blog -->
+      <div class="text-center mt-12">
+        <p class="text-slate-600 mb-4">Mais de 50 artigos sobre educação financeira</p>
+        <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white bg-gradient-to-r from-slate-600 to-gray-700 shadow-lg hover:opacity-90 transition-all">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM17 12H7V10H17V12ZM15 16H7V14H15V16ZM17 8H7V6H17V8Z"/>
+          </svg>
+          <span>Ver Todos os Artigos</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials-section" class="py-16 lg:py-24 bg-white border-y border-slate-200">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">O que nossos usuários dizem</h2>
+        <p class="mt-3 text-slate-600">Famílias e empresas que já organizaram suas finanças com o MinhaGrana</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold">
+              M
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Maria Silva</h4>
+              <p class="text-sm text-slate-600">Mãe de 2 filhos</p>
+            </div>
+          </div>
+          <p class="text-slate-700 italic">"O MinhaGrana transformou nossa organização financeira. Agora sabemos exatamente onde cada real vai e conseguimos economizar 30% do nosso orçamento mensal!"</p>
+          <div class="flex text-yellow-400 mt-3">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+              J
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">João Santos</h4>
+              <p class="text-sm text-slate-600">Empresário</p>
+            </div>
+          </div>
+          <p class="text-slate-700 italic">"Como empresário, preciso de controle total. O MinhaGrana me dá visibilidade completa das finanças pessoais e empresariais em um só lugar."</p>
+          <div class="flex text-yellow-400 mt-3">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white font-bold">
+              A
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Ana Costa</h4>
+              <p class="text-sm text-slate-600">Professora</p>
+            </div>
+          </div>
+          <p class="text-slate-700 italic">"O Assistente AI é incrível! Ele me ajuda a categorizar despesas e criar metas. Nunca foi tão fácil organizar as finanças da família."</p>
+          <div class="flex text-yellow-400 mt-3">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white font-bold">
+              C
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Carlos Oliveira</h4>
+              <p class="text-sm text-slate-600">Engenheiro</p>
+            </div>
+          </div>
+          <p class="text-slate-700 italic">"A lista de compras colaborativa é perfeita! Minha esposa e eu sempre sabemos o que comprar e nunca mais esquecemos nada no supermercado."</p>
+          <div class="flex text-yellow-400 mt-3">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="testimonial-card bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white font-bold">
+              L
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Lucia Ferreira</h4>
+              <p class="text-sm text-slate-600">Aposentada</p>
+            </div>
+          </div>
+          <p class="text-slate-700 italic">"Mesmo sendo aposentada, o MinhaGrana me ajuda a controlar minha renda fixa. Os relatórios são claros e fáceis de entender."</p>
+          <div class="flex text-yellow-400 mt-3">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="testimonial-card bg-slate-50 rounded-2xl p-6 border border-slate-200">
+          <div class="flex items-center mb-4">
+            <div class="h-12 w-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold">
+              R
+            </div>
+            <div class="ml-4">
+              <h4 class="font-semibold">Roberto Lima</h4>
+              <p class="text-sm text-slate-600">Freelancer</p>
+            </div>
+          </div>
+          <p class="text-slate-700 italic">"Como freelancer, tenho renda variável. O MinhaGrana me ajuda a planejar e controlar meus gastos, garantindo que sempre tenha reserva para os meses mais fracos."</p>
+          <div class="flex text-yellow-400 mt-3">
+            ⭐⭐⭐⭐⭐
+          </div>
+        </div>
+      </div>
+
+      <!-- Estatísticas -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">4.8/5</div>
+          <div class="text-sm text-slate-600">Avaliação média</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">2.5k+</div>
+          <div class="text-sm text-slate-600">Usuários ativos</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">98%</div>
+          <div class="text-sm text-slate-600">Satisfação</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">R$ 1.2M</div>
+          <div class="text-sm text-slate-600">Economizados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sistema de Afiliados -->
+  <section class="py-16 lg:py-24 bg-gradient-to-br from-emerald-50 to-teal-50">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">Programa de Afiliados</h2>
+        <p class="mt-3 text-slate-600">Ganhe dinheiro indicando o MinhaGrana para seus amigos e seguidores</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Benefícios -->
+        <div>
+          <h3 class="text-2xl font-bold mb-6">Por que ser um afiliado MinhaGrana?</h3>
+          
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-white text-xl">💰</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg mb-2">Comissões Atraentes</h4>
+                <p class="text-slate-600">Ganhe até 30% de comissão por cada venda realizada através do seu link.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-white text-xl">📊</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg mb-2">Dashboard Completo</h4>
+                <p class="text-slate-600">Acompanhe suas vendas, comissões e performance em tempo real.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-white text-xl">🎯</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg mb-2">Material de Marketing</h4>
+                <p class="text-slate-600">Acesso a banners, textos e materiais prontos para suas campanhas.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-white text-xl">🤝</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-lg mb-2">Suporte Dedicado</h4>
+                <p class="text-slate-600">Equipe especializada para ajudar você a maximizar seus ganhos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário de Afiliado -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg p-8">
+          <h3 class="text-xl font-bold mb-6">Torne-se um Afiliado</h3>
+          
+          <form id="affiliateForm" class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Nome Completo</label>
+              <input type="text" name="nome" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Email</label>
+              <input type="email" name="email" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Telefone</label>
+              <input type="tel" name="telefone" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Como conheceu o MinhaGrana?</label>
+              <select name="origem" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                <option value="">Selecione uma opção</option>
+                <option value="google">Google</option>
+                <option value="facebook">Facebook</option>
+                <option value="instagram">Instagram</option>
+                <option value="youtube">YouTube</option>
+                <option value="indicacao">Indicação</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Área de Atuação</label>
+              <select name="area" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                <option value="">Selecione uma opção</option>
+                <option value="influencer">Influencer Digital</option>
+                <option value="youtuber">YouTuber</option>
+                <option value="blogger">Blogger</option>
+                <option value="coach">Coach Financeiro</option>
+                <option value="empresario">Empresário</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Número de Seguidores</label>
+              <select name="seguidores" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                <option value="">Selecione uma opção</option>
+                <option value="0-1000">0 - 1.000</option>
+                <option value="1000-10000">1.000 - 10.000</option>
+                <option value="10000-50000">10.000 - 50.000</option>
+                <option value="50000-100000">50.000 - 100.000</option>
+                <option value="100000+">100.000+</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Plataformas onde atua</label>
+              <div class="grid grid-cols-2 gap-2 mt-2">
+                <label class="flex items-center">
+                  <input type="checkbox" name="plataformas" value="instagram" class="mr-2">
+                  <span class="text-sm">Instagram</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" name="plataformas" value="youtube" class="mr-2">
+                  <span class="text-sm">YouTube</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" name="plataformas" value="tiktok" class="mr-2">
+                  <span class="text-sm">TikTok</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" name="plataformas" value="facebook" class="mr-2">
+                  <span class="text-sm">Facebook</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" name="plataformas" value="linkedin" class="mr-2">
+                  <span class="text-sm">LinkedIn</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" name="plataformas" value="blog" class="mr-2">
+                  <span class="text-sm">Blog/Site</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-2">Conte-nos sobre você</label>
+              <textarea name="sobre" rows="3" placeholder="Fale sobre sua experiência, público-alvo e como pretende promover o MinhaGrana..." class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"></textarea>
+            </div>
+
+            <button type="submit" class="w-full px-6 py-4 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg hover:opacity-90 transition-all font-semibold">
+              Quero ser um Afiliado
+            </button>
+          </form>
+
+          <div id="affiliateMsg" class="mt-4 text-sm"></div>
+        </div>
+      </div>
+
+      <!-- Estatísticas do Programa -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">R$ 50k+</div>
+          <div class="text-sm text-slate-600">Pago em comissões</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">200+</div>
+          <div class="text-sm text-slate-600">Afiliados ativos</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">30%</div>
+          <div class="text-sm text-slate-600">Comissão máxima</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-emerald-600">24h</div>
+          <div class="text-sm text-slate-600">Aprovação média</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulário de interesse -->
+  <section id="interesse" class="py-16 lg:py-24">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 id="form-headline" class="text-3xl font-bold">Fale com a gente</h2>
+          <p class="mt-3 text-slate-600">Preencha e receba acesso prioritário, materiais de onboarding e condições especiais de lançamento.</p>
+          <ul class="mt-6 space-y-3 text-sm text-slate-700 list-disc list-inside">
+            <li>Material de educação financeira para equipes e famílias.</li>
+            <li>Templates de categorias e metas por perfil.</li>
+            <li>Suporte humano + Assistente AI para começar rápido.</li>
+          </ul>
+        </div>
+
+        <form id="leadForm" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm grid gap-4" novalidate>
+          <div>
+            <label class="block text-sm font-medium mb-1" for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" required placeholder="Seu nome completo" class="w-full rounded-xl border-slate-300 focus:ring-emerald-500 focus:border-emerald-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1" for="telefone">Telefone</label>
+            <input id="telefone" name="telefone" type="tel" required placeholder="(DDD) 90000-0000" pattern="^[0-9()\-\s+]{8,}$" class="w-full rounded-xl border-slate-300 focus:ring-emerald-500 focus:border-emerald-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1" for="email">E‑mail</label>
+            <input id="email" name="email" type="email" required placeholder="voce@exemplo.com" class="w-full rounded-xl border-slate-300 focus:ring-emerald-500 focus:border-emerald-500" />
+          </div>
+
+          <fieldset>
+            <legend class="block text-sm font-medium mb-2">Interesse</legend>
+            <div class="grid sm:grid-cols-3 gap-2">
+              <label class="flex items-center gap-2 rounded-xl border border-slate-300 p-3 cursor-pointer">
+                <input type="radio" name="tipo" value="pessoal" required>
+                <span>Pessoal</span>
+              </label>
+              <label class="flex items-center gap-2 rounded-xl border border-slate-300 p-3 cursor-pointer">
+                <input type="radio" name="tipo" value="familiar">
+                <span>Familiar</span>
+              </label>
+              <label class="flex items-center gap-2 rounded-xl border border-slate-300 p-3 cursor-pointer">
+                <input type="radio" name="tipo" value="empresa">
+                <span>Minha empresa</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="mt-2 px-6 py-3 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow hover:opacity-90">Enviar interesse</button>
+          <p id="formMsg" class="text-sm mt-1"></p>
+          <p class="text-xs text-slate-500">Ao enviar, você concorda em receber contato e materiais do MinhaGrana. Seus dados não serão compartilhados.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / Rodapé -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg grid lg:grid-cols-2 gap-8">
+      <div>
+        <h3 class="font-semibold text-lg">Perguntas frequentes</h3>
+        <div class="mt-4 space-y-3 text-sm">
+          <details class="p-4 border border-slate-200 rounded-xl">
+            <summary class="font-medium">O app funciona em celular e computador?</summary>
+            <p class="mt-2 text-slate-600">Sim. É PWA responsivo e roda bem em navegadores modernos, Android e iOS.</p>
+          </details>
+          <details class="p-4 border border-slate-200 rounded-xl">
+            <summary class="font-medium">Posso personalizar categorias e o Assistente AI?</summary>
+            <p class="mt-2 text-slate-600">Sim. Crie suas próprias categorias e edite o prompt para ajustar o comportamento do Assistente.</p>
+          </details>
+          <details class="p-4 border border-slate-200 rounded-xl">
+            <summary class="font-medium">Como os dados são auditados?</summary>
+            <p class="mt-2 text-slate-600">Tudo possui histórico de alterações (criação, edição, exclusão), por usuário e data.</p>
+          </details>
+        </div>
+      </div>
+      <div class="rounded-2xl p-6 border border-slate-200 bg-slate-50">
+        <h4 class="font-semibold">Pronto para começar?</h4>
+        <p class="mt-2 text-slate-600">Envie seu interesse e receba um tour guiado.</p>
+        <a href="#interesse" class="inline-block mt-4 px-5 py-3 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow hover:opacity-90">Quero meu acesso</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 text-sm text-slate-600">
+    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© <span id="year"></span> MinhaGrana • Todos os direitos reservados.</p>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-slate-900">Termos</a>
+        <span class="text-slate-300">•</span>
+        <a href="#" class="hover:text-slate-900">Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Ano dinâmico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Registrar Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registrado com sucesso:', registration);
+          })
+          .catch((registrationError) => {
+            console.log('Falha no registro do SW:', registrationError);
+          });
+      });
+    }
+
+    // Manipulação simples do formulário (exemplo; integre com seu backend, n8n ou Formspree)
+    const form = document.getElementById('leadForm');
+    const msg = document.getElementById('formMsg');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.textContent = '';
+      msg.className = 'text-sm mt-1';
+
+      const data = Object.fromEntries(new FormData(form));
+      // Validações simples
+      if (!data.nome || !data.telefone || !data.email || !data.tipo) {
+        msg.textContent = 'Confira os campos obrigatórios.';
+        msg.classList.add('text-red-600');
+        return;
+      }
+
+      try {
+        // Enviar para o backend
+        const resp = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await resp.json();
+        
+        if (!resp.ok) {
+          throw new Error(result.message || 'Falha no envio');
+        }
+
+        msg.textContent = result.message;
+        msg.classList.add('text-emerald-700');
+        
+        // Google Analytics - Lead capturado
+        gtag('event', 'lead_captured', {
+          event_category: 'engagement',
+          event_label: data.tipo,
+          value: 1
+        });
+        
+        form.reset();
+      } catch (err) {
+        msg.textContent = err.message || 'Ops! Não foi possível enviar agora. Tente novamente ou fale com nosso suporte.';
+        msg.classList.add('text-red-600');
+      }
+    });
+
+    // Funções para modal de vídeos
+    function openVideoModal(videoId) {
+      const modal = document.getElementById('videoModal');
+      const title = document.getElementById('videoTitle');
+      const description = document.getElementById('videoDescription');
+      
+      const videos = {
+        'intro': {
+          title: 'Introdução ao MinhaGrana',
+          description: 'Neste vídeo, você aprenderá os conceitos básicos do MinhaGrana e como navegar pela interface principal. Perfeito para iniciantes!'
+        },
+        'setup': {
+          title: 'Configuração Inicial',
+          description: 'Aprenda a configurar sua conta, criar categorias personalizadas e adicionar membros da família ao sistema.'
+        },
+        'ai': {
+          title: 'Assistente AI',
+          description: 'Descubra como usar a inteligência artificial para automatizar tarefas e obter insights valiosos sobre suas finanças.'
+        },
+        'reports': {
+          title: 'Relatórios e Análises',
+          description: 'Aprenda a interpretar gráficos, relatórios detalhados e métricas para tomar decisões financeiras mais inteligentes.'
+        },
+        'shopping': {
+          title: 'Lista de Compras Colaborativa',
+          description: 'Veja como criar, compartilhar e gerenciar listas de compras com toda a família em tempo real.'
+        },
+        'tips': {
+          title: 'Dicas e Truques Avançados',
+          description: 'Funcionalidades avançadas, atalhos de teclado e dicas para maximizar sua produtividade no MinhaGrana.'
+        }
+      };
+      
+      const video = videos[videoId];
+      if (video) {
+        title.textContent = video.title;
+        description.textContent = video.description;
+      }
+      
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      
+      // Tracking
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'video_modal_opened', {
+          event_category: 'engagement',
+          event_label: videoId
+        });
+      }
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Fechar modal com ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+      }
+    });
+
+    // Formulário de Afiliados
+    const affiliateForm = document.getElementById('affiliateForm');
+    const affiliateMsg = document.getElementById('affiliateMsg');
+    
+    if (affiliateForm) {
+      affiliateForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(affiliateForm);
+        const data = {
+          nome: formData.get('nome'),
+          email: formData.get('email'),
+          telefone: formData.get('telefone'),
+          origem: formData.get('origem'),
+          area: formData.get('area'),
+          seguidores: formData.get('seguidores'),
+          plataformas: formData.getAll('plataformas'),
+          sobre: formData.get('sobre'),
+          tipo: 'afiliado'
+        };
+
+        // Validação básica
+        if (!data.nome || !data.email || !data.telefone || !data.origem || !data.area || !data.seguidores) {
+          affiliateMsg.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+          affiliateMsg.classList.add('text-red-600');
+          return;
+        }
+
+        try {
+          // Enviar para o backend
+          const resp = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          });
+          
+          const result = await resp.json();
+          
+          if (!resp.ok) {
+            throw new Error(result.message || 'Falha no envio');
+          }
+
+          affiliateMsg.textContent = 'Obrigado! Recebemos sua solicitação de afiliado. Entraremos em contato em até 24 horas.';
+          affiliateMsg.classList.add('text-emerald-700');
+          affiliateForm.reset();
+          
+          // Tracking
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'affiliate_application', {
+              event_category: 'engagement',
+              event_label: 'affiliate_form'
+            });
+          }
+          
+        } catch (err) {
+          affiliateMsg.textContent = err.message || 'Ops! Não foi possível enviar agora. Tente novamente.';
+          affiliateMsg.classList.add('text-red-600');
+        }
+      });
+    }
+  </script>
+
+  <!-- A/B Testing -->
+  <script src="ab-testing.js"></script>
+  
+  <!-- Chat Support -->
+  <script src="chat-support.js"></script>
+  
+  <!-- Advanced Animations -->
+  <script src="animations.js"></script>
+</body>
+</html>

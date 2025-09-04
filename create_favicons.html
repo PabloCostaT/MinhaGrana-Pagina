@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Favicons - MinhaGrana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .favicon-preview {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            align-items: center;
+        }
+        .favicon-item {
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #10B981;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0D9488;
+        }
+        .instructions {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Gerador de Favicons - MinhaGrana</h1>
+        
+        <div class="instructions">
+            <h3>📋 Instruções:</h3>
+            <ol>
+                <li>Clique nos botões "Download" abaixo de cada favicon</li>
+                <li>Salve os arquivos na pasta do seu projeto</li>
+                <li>Atualize o HTML com as referências corretas</li>
+            </ol>
+        </div>
+
+        <div class="favicon-preview">
+            <div class="favicon-item">
+                <h4>16x16</h4>
+                <canvas id="canvas16" width="16" height="16"></canvas>
+                <br>
+                <button onclick="downloadCanvas('canvas16', 'favicon-16x16.png')">Download</button>
+            </div>
+            
+            <div class="favicon-item">
+                <h4>32x32</h4>
+                <canvas id="canvas32" width="32" height="32"></canvas>
+                <br>
+                <button onclick="downloadCanvas('canvas32', 'favicon-32x32.png')">Download</button>
+            </div>
+            
+            <div class="favicon-item">
+                <h4>48x48</h4>
+                <canvas id="canvas48" width="48" height="48"></canvas>
+                <br>
+                <button onclick="downloadCanvas('canvas48', 'favicon-48x48.png')">Download</button>
+            </div>
+            
+            <div class="favicon-item">
+                <h4>180x180 (Apple)</h4>
+                <canvas id="canvas180" width="180" height="180"></canvas>
+                <br>
+                <button onclick="downloadCanvas('canvas180', 'apple-touch-icon.png')">Download</button>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <h3>📝 Código HTML para adicionar ao seu site:</h3>
+            <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;"><code>&lt;!-- Favicons --&gt;
+&lt;link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"&gt;
+&lt;link rel="icon" type="image/svg+xml" href="MinhaGrana.svg"&gt;</code></pre>
+        </div>
+    </div>
+
+    <script>
+        // Cores do MinhaGrana
+        const emerald = '#10B981';
+        const teal = '#0D9488';
+        const white = '#FFFFFF';
+
+        function drawFavicon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Limpa o canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Círculo externo (emerald)
+            ctx.fillStyle = emerald;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 1, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Círculo interno (teal)
+            ctx.fillStyle = teal;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - size/8, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Letra "M"
+            ctx.fillStyle = white;
+            ctx.font = `bold ${size * 0.4}px Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('M', size/2, size/2 + size * 0.05);
+        }
+
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Desenha todos os favicons quando a página carrega
+        window.onload = function() {
+            drawFavicon('canvas16', 16);
+            drawFavicon('canvas32', 32);
+            drawFavicon('canvas48', 48);
+            drawFavicon('canvas180', 180);
+        };
+    </script>
+</body>
+</html>
