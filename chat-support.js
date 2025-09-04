@@ -34,7 +34,7 @@ class ChatSupport {
       <div class="chat-header">
         <div class="chat-header-info">
           <div class="chat-avatar">
-            <span>MG</span>
+            <img src="favicon-32x32.png" alt="MinhaGrana" class="w-full h-full object-contain" />
           </div>
           <div>
             <h3>Suporte MinhaGrana</h3>
@@ -51,12 +51,17 @@ class ChatSupport {
           </div>
         </div>
       </div>
-      <div class="chat-input-container">
-        <div class="chat-quick-actions">
-          <button class="quick-action" data-message="Como funciona o MinhaGrana?">Como funciona?</button>
-          <button class="quick-action" data-message="Quero fazer uma demonstração">Ver demo</button>
-          <button class="quick-action" data-message="Preciso de ajuda técnica">Suporte técnico</button>
-        </div>
+              <div class="chat-input-container">
+          <div class="chat-quick-actions">
+            <button class="quick-action" data-message="Como funciona o MinhaGrana?">Como funciona?</button>
+            <button class="quick-action" data-message="Quero fazer uma demonstração">Ver demo</button>
+            <button class="quick-action" data-message="Preciso de ajuda técnica">Suporte técnico</button>
+          </div>
+          <div class="chat-footer-links">
+            <a href="termos-de-uso.html" target="_blank" class="text-xs text-slate-500 hover:text-slate-700">Termos</a>
+            <span class="text-slate-400">•</span>
+            <a href="politica-privacidade.html" target="_blank" class="text-xs text-slate-500 hover:text-slate-700">Privacidade</a>
+          </div>
         <div class="chat-input-wrapper">
           <input type="text" id="chat-input" placeholder="Digite sua mensagem..." maxlength="500">
           <button id="chat-send" class="chat-send">
@@ -314,6 +319,17 @@ class ChatSupport {
           opacity: 0.5;
           cursor: not-allowed;
           transform: none;
+        }
+
+        .chat-footer-links {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 8px;
+          margin-top: 8px;
+          padding-top: 8px;
+          padding-left: 8px;
+          border-top: 1px solid #E2E8F0;
         }
 
         .typing-indicator {
