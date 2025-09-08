@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MinhaGrana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #0f172a;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-title {
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .positive {
+            color: #059669;
+        }
+        
+        .negative {
+            color: #dc2626;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .chart-section {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        
+        .chart-period {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .period-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            color: #64748b;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .period-btn.active {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+        
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .recent-transactions {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .transactions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .transactions-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        
+        .view-all {
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .transaction-details {
+            flex: 1;
+        }
+        
+        .transaction-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
+        
+        .transaction-category {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        .transaction-amount {
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .amount-positive {
+            color: #059669;
+        }
+        
+        .amount-negative {
+            color: #dc2626;
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            color: #64748b;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .action-btn:hover {
+            border-color: #10b981;
+            color: #10b981;
+        }
+        
+        .action-btn.primary {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+        
+        .action-btn.primary:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">M</div>
+                <span>MinhaGrana</span>
+            </div>
+            <div class="user-menu">
+                <div class="user-avatar">JS</div>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Saldo Total</span>
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">💰</div>
+                </div>
+                <div class="stat-value">R$ 2.847,50</div>
+                <div class="stat-change positive">
+                    <span>↗</span>
+                    <span>+12% este mês</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Receitas</span>
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;">📈</div>
+                </div>
+                <div class="stat-value">R$ 7.200,00</div>
+                <div class="stat-change positive">
+                    <span>↗</span>
+                    <span>+5% este mês</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Despesas</span>
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">📉</div>
+                </div>
+                <div class="stat-value">R$ 4.352,50</div>
+                <div class="stat-change negative">
+                    <span>↘</span>
+                    <span>-8% este mês</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-title">Economia</span>
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">🎯</div>
+                </div>
+                <div class="stat-value">R$ 2.847,50</div>
+                <div class="stat-change positive">
+                    <span>↗</span>
+                    <span>Meta: R$ 2.500</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h3 class="chart-title">Evolução Financeira</h3>
+                    <div class="chart-period">
+                        <button class="period-btn">7D</button>
+                        <button class="period-btn">30D</button>
+                        <button class="period-btn active">90D</button>
+                        <button class="period-btn">1A</button>
+                    </div>
+                </div>
+                <div class="chart-placeholder">
+                    📊 Gráfico de evolução financeira
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #10b981;"></div>
+                        <span>Receitas</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #ef4444;"></div>
+                        <span>Despesas</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #3b82f6;"></div>
+                        <span>Saldo</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-transactions">
+                <div class="transactions-header">
+                    <h3 class="transactions-title">Transações Recentes</h3>
+                    <a href="#" class="view-all">Ver todas</a>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: linear-gradient(135deg, #f97316, #ea580c); color: white;">🛒</div>
+                    <div class="transaction-details">
+                        <div class="transaction-title">Supermercado</div>
+                        <div class="transaction-category">Alimentação</div>
+                    </div>
+                    <div class="transaction-amount amount-negative">-R$ 245,80</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">💰</div>
+                    <div class="transaction-details">
+                        <div class="transaction-title">Salário</div>
+                        <div class="transaction-category">Rendimento</div>
+                    </div>
+                    <div class="transaction-amount amount-positive">+R$ 5.500,00</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">🏠</div>
+                    <div class="transaction-details">
+                        <div class="transaction-title">Aluguel</div>
+                        <div class="transaction-category">Moradia</div>
+                    </div>
+                    <div class="transaction-amount amount-negative">-R$ 1.200,00</div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">⛽</div>
+                    <div class="transaction-details">
+                        <div class="transaction-title">Combustível</div>
+                        <div class="transaction-category">Transporte</div>
+                    </div>
+                    <div class="transaction-amount amount-negative">-R$ 180,00</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <button class="action-btn">
+                <span>➕</span>
+                <span>Nova Despesa</span>
+            </button>
+            <button class="action-btn">
+                <span>💰</span>
+                <span>Nova Receita</span>
+            </button>
+            <button class="action-btn primary">
+                <span>🤖</span>
+                <span>Assistente AI</span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

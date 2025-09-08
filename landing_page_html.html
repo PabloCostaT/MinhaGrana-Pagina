@@ -6,29 +6,8 @@
   <title>MinhaGrana — Organize as finanças da sua família</title>
   <meta name="description" content="MinhaGrana é uma aplicação completa de gestão financeira e organização familiar: despesas, recorrentes, carteira, membros, lista de compras, agenda, tarefas e Assistente AI." />
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              emerald: {
-                50: '#ECFDF5',
-                100: '#D1FAE5',
-                500: '#10B981',
-                600: '#0EA5A8' // usaremos como teal/emerald mix para gradiente
-              },
-              teal: {
-                600: '#0D9488'
-              },
-            },
-          },
-        }
-      }
-    }
-  </script>
+  <!-- CSS Local -->
+  <link rel="stylesheet" href="styles.css">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -62,163 +41,213 @@
   <style>
     .container-lg{max-width:110rem}
     .glass{backdrop-filter:saturate(180%) blur(10px); background:rgba(255,255,255,.55)}
+    
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #10b981, #059669);
+      z-index: 9999;
+      transition: width 0.1s ease;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748b;
+      cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      nav.open {
+        display: flex;
+      }
+      
+      nav a {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+  
   <!-- Top Bar -->
-  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg flex items-center justify-between h-16">
-      <div class="flex items-center gap-3">
-        <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 grid place-content-center">
-          <img src="favicon-48x48.png" alt="MinhaGrana" class="h-6 w-6" />
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="favicon-48x48.png" alt="MinhaGrana" />
         </div>
-        <span class="font-semibold">MinhaGrana</span>
+        <span class="logo-text">MinhaGrana</span>
       </div>
-      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600">
-        <a href="#beneficios" class="hover:text-slate-900">Benefícios</a>
-        <a href="#como-funciona" class="hover:text-slate-900">Como funciona</a>
-        <a href="#publicos" class="hover:text-slate-900">Para quem</a>
-        <a href="#recursos" class="hover:text-slate-900">Recursos</a>
-        <a href="#interesse" class="px-4 py-2 rounded-lg text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow hover:opacity-90">Quero conhecer</a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+      <nav id="main-nav">
+        <a href="#beneficios">Benefícios</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#publicos">Para quem</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#interesse" class="cta-button">Quero conhecer</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 -z-10 opacity-70 bg-gradient-to-b from-emerald-50 to-teal-50"></div>
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
       <div>
-        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
-          Controle financeiro <span class="text-emerald-600">simples</span>,
-          colaboração <span class="text-teal-600">real</span>.
+        <h1 class="hero-title">
+          Controle financeiro <span class="emerald">simples</span>,
+          colaboração <span class="teal">real</span>.
         </h1>
-        <p class="mt-5 text-lg text-slate-600 max-w-2xl">
+        <p class="hero-description">
           O MinhaGrana une despesas, carteira, membros, lista de compras, agenda, tarefas e um Assistente AI em uma interface moderna para indivíduos, famílias e empresas.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#interesse" id="hero-cta-button" class="px-6 py-3 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow hover:opacity-90">Quero usar na prática</a>
-          <a href="#beneficios" class="px-6 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-white">Ver benefícios</a>
+        <div class="hero-buttons">
+          <a href="#interesse" id="hero-cta-button" class="hero-button-primary">Quero usar na prática</a>
+          <a href="#beneficios" class="hero-button-secondary">Ver benefícios</a>
         </div>
-        <dl class="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm">
-          <div class="p-4 rounded-xl bg-white border border-slate-200">
-            <dt class="text-slate-500">Economia média</dt>
-            <dd class="mt-1 font-semibold">até 20%/mês</dd>
+        <dl class="hero-stats">
+          <div class="stat-card">
+            <dt class="stat-label">Economia média</dt>
+            <dd class="stat-value">até 20%/mês</dd>
           </div>
-          <div class="p-4 rounded-xl bg-white border border-slate-200">
-            <dt class="text-slate-500">Lançamentos/mês</dt>
-            <dd class="mt-1 font-semibold">10k+ processados</dd>
+          <div class="stat-card">
+            <dt class="stat-label">Lançamentos/mês</dt>
+            <dd class="stat-value">10k+ processados</dd>
           </div>
-          <div class="p-4 rounded-xl bg-white border border-slate-200">
-            <dt class="text-slate-500">Satisfação</dt>
-            <dd class="mt-1 font-semibold">NPS 84</dd>
+          <div class="stat-card">
+            <dt class="stat-label">Satisfação</dt>
+            <dd class="stat-value">NPS 84</dd>
           </div>
         </dl>
       </div>
-      <div class="relative">
-        <div class="absolute -inset-4 bg-gradient-to-r from-emerald-500/10 to-teal-600/10 rounded-3xl"></div>
-        <div class="relative bg-white rounded-3xl border border-slate-200 shadow-lg p-6">
+      <div class="mockup-container">
+        <div class="mockup-bg"></div>
+        <div class="mockup">
           <!-- Mockup interativo -->
-          <div class="grid gap-4">
+          <div class="mockup-grid">
             <!-- Dashboard Principal -->
-            <div class="rounded-2xl border border-slate-200 p-4 bg-gradient-to-br from-emerald-50 to-teal-50">
-              <div class="flex items-center justify-between mb-3">
-                <h3 class="font-semibold text-emerald-800">Dashboard Financeiro</h3>
-                <span class="text-xs text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">Saldo +R$ 842</span>
+            <div class="dashboard-card">
+              <div class="dashboard-header">
+                <h3 class="dashboard-title">Dashboard Financeiro</h3>
+                <span class="balance-badge">Saldo +R$ 842</span>
               </div>
-              <div class="h-3 rounded-full bg-slate-200 overflow-hidden">
-                <div class="h-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 w-3/4 transition-all duration-1000"></div>
+              <div class="progress-bar">
+                <div class="progress-fill"></div>
               </div>
-              <div class="mt-3 grid grid-cols-2 gap-3 text-sm">
-                <div class="bg-white/60 rounded-lg p-2">
-                  <div class="text-emerald-700 font-semibold">R$ 7.200</div>
-                  <div class="text-slate-600">Receitas</div>
+              <div class="dashboard-stats">
+                <div class="stat-item">
+                  <div class="stat-amount">R$ 7.200</div>
+                  <div class="stat-label-small">Receitas</div>
                 </div>
-                <div class="bg-white/60 rounded-lg p-2">
-                  <div class="text-red-600 font-semibold">R$ 6.358</div>
-                  <div class="text-slate-600">Despesas</div>
+                <div class="stat-item">
+                  <div class="stat-amount negative">R$ 6.358</div>
+                  <div class="stat-label-small">Despesas</div>
                 </div>
               </div>
             </div>
 
             <!-- Categorias -->
-            <div class="rounded-2xl border border-slate-200 p-4">
-              <h3 class="font-semibold mb-3 text-slate-800">Gastos por Categoria</h3>
-              <div class="space-y-2">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 rounded-full bg-indigo-500"></div>
-                    <span class="text-sm">Moradia</span>
+            <div class="categories-card">
+              <h3 class="categories-title">Gastos por Categoria</h3>
+              <div>
+                <div class="category-item">
+                  <div class="category-info">
+                    <div class="category-dot indigo"></div>
+                    <span>Moradia</span>
                   </div>
-                  <div class="flex items-center gap-2">
-                    <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
-                      <div class="h-2 bg-indigo-500 rounded-full w-3/4"></div>
+                  <div class="category-progress">
+                    <div class="category-bar">
+                      <div class="category-fill indigo"></div>
                     </div>
-                    <span class="text-sm font-medium">34%</span>
+                    <span class="category-percentage">34%</span>
                   </div>
                 </div>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 rounded-full bg-blue-500"></div>
-                    <span class="text-sm">Mercado</span>
+                <div class="category-item">
+                  <div class="category-info">
+                    <div class="category-dot blue"></div>
+                    <span>Mercado</span>
                   </div>
-                  <div class="flex items-center gap-2">
-                    <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
-                      <div class="h-2 bg-blue-500 rounded-full w-2/3"></div>
+                  <div class="category-progress">
+                    <div class="category-bar">
+                      <div class="category-fill blue"></div>
                     </div>
-                    <span class="text-sm font-medium">27%</span>
+                    <span class="category-percentage">27%</span>
                   </div>
                 </div>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 rounded-full bg-orange-500"></div>
-                    <span class="text-sm">Transporte</span>
+                <div class="category-item">
+                  <div class="category-info">
+                    <div class="category-dot orange"></div>
+                    <span>Transporte</span>
                   </div>
-                  <div class="flex items-center gap-2">
-                    <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
-                      <div class="h-2 bg-orange-500 rounded-full w-1/3"></div>
+                  <div class="category-progress">
+                    <div class="category-bar">
+                      <div class="category-fill orange"></div>
                     </div>
-                    <span class="text-sm font-medium">11%</span>
+                    <span class="category-percentage">11%</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Assistente AI -->
-            <div class="rounded-2xl border border-slate-200 p-4 bg-gradient-to-br from-purple-50 to-pink-50">
-              <div class="flex items-center gap-2 mb-2">
-                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                  <span class="text-white text-xs">🤖</span>
-                </div>
-                <h3 class="font-semibold text-purple-800">Assistente AI</h3>
+            <div class="ai-card">
+              <div class="ai-header">
+                <div class="ai-icon">🤖</div>
+                <h3 class="ai-title">Assistente AI</h3>
               </div>
-              <div class="bg-white/60 rounded-lg p-3 text-sm">
-                <div class="flex items-start gap-2">
-                  <div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
+              <div class="ai-message">
+                <div class="ai-message-content">
+                  <div class="ai-status-dot"></div>
                   <div>
-                    <p class="text-slate-700">"Pedro paga <span class="font-semibold text-emerald-600">R$ 120</span> para Ana"</p>
-                    <p class="text-xs text-slate-500 mt-1">Saldos equilibrados automaticamente</p>
+                    <p class="ai-text">"Pedro paga <span class="ai-highlight">R$ 120</span> para Ana"</p>
+                    <p class="ai-subtitle">Saldos equilibrados automaticamente</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Lista de Compras -->
-            <div class="rounded-2xl border border-slate-200 p-4">
-              <h3 class="font-semibold mb-3 text-slate-800">Lista de Compras</h3>
-              <div class="space-y-2">
-                <div class="flex items-center gap-2 text-sm">
-                  <div class="w-4 h-4 rounded border-2 border-emerald-500 bg-emerald-500 flex items-center justify-center">
-                    <span class="text-white text-xs">✓</span>
-                  </div>
-                  <span class="line-through text-slate-500">Leite</span>
+            <div class="shopping-card">
+              <h3 class="shopping-title">Lista de Compras</h3>
+              <div>
+                <div class="shopping-item completed">
+                  <div class="shopping-checkbox">✓</div>
+                  <span>Leite</span>
                 </div>
-                <div class="flex items-center gap-2 text-sm">
-                  <div class="w-4 h-4 rounded border-2 border-slate-300"></div>
+                <div class="shopping-item">
+                  <div class="shopping-checkbox unchecked"></div>
                   <span>Pão</span>
                 </div>
-                <div class="flex items-center gap-2 text-sm">
-                  <div class="w-4 h-4 rounded border-2 border-slate-300"></div>
+                <div class="shopping-item">
+                  <div class="shopping-checkbox unchecked"></div>
                   <span>Ovos</span>
                 </div>
               </div>
@@ -230,81 +259,81 @@
   </section>
 
   <!-- Benefícios principais -->
-  <section id="beneficios" class="py-16 lg:py-24">
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
+  <section id="beneficios" class="section">
+    <div class="container">
       <div class="max-w-3xl">
-        <h2 class="text-3xl font-bold">Por que o MinhaGrana?</h2>
-        <p class="mt-3 text-slate-600">Transparência, organização e decisões melhores com dados claros e colaboração em tempo real.</p>
+        <h2 class="section-title">Por que o MinhaGrana?</h2>
+        <p class="section-description">Transparência, organização e decisões melhores com dados claros e colaboração em tempo real.</p>
       </div>
 
-      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
-          <div class="h-10 w-10 grid place-content-center rounded-lg bg-emerald-100 text-emerald-700 mb-3">✓</div>
-          <h3 class="font-semibold">Controle total das despesas</h3>
-          <p class="mt-2 text-sm text-slate-600">Lançamentos detalhados, divisão inteligente por pessoa/percentual e histórico de alterações.</p>
+      <div class="mt-10 grid-3">
+        <div class="card">
+          <div class="card-icon emerald">✓</div>
+          <h3 class="card-title">Controle total das despesas</h3>
+          <p class="card-description">Lançamentos detalhados, divisão inteligente por pessoa/percentual e histórico de alterações.</p>
         </div>
-        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
-          <div class="h-10 w-10 grid place-content-center rounded-lg bg-blue-100 text-blue-700 mb-3">ℹ</div>
-          <h3 class="font-semibold">Insights que viram ação</h3>
-          <p class="mt-2 text-sm text-slate-600">Dashboard com gastos por categoria, projeções e cálculo automático de acertos.</p>
+        <div class="card">
+          <div class="card-icon blue">ℹ</div>
+          <h3 class="card-title">Insights que viram ação</h3>
+          <p class="card-description">Dashboard com gastos por categoria, projeções e cálculo automático de acertos.</p>
         </div>
-        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
-          <div class="h-10 w-10 grid place-content-center rounded-lg bg-purple-100 text-purple-700 mb-3">🤖</div>
-          <h3 class="font-semibold">Assistente AI</h3>
-          <p class="mt-2 text-sm text-slate-600">Crie despesas, tarefas, eventos e mais via chat. Comportamento personalizável por prompt.</p>
+        <div class="card">
+          <div class="card-icon purple">🤖</div>
+          <h3 class="card-title">Assistente AI</h3>
+          <p class="card-description">Crie despesas, tarefas, eventos e mais via chat. Comportamento personalizável por prompt.</p>
         </div>
-        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
-          <div class="h-10 w-10 grid place-content-center rounded-lg bg-orange-100 text-orange-600 mb-3">🛒</div>
-          <h3 class="font-semibold">Lista de compras colaborativa</h3>
-          <p class="mt-2 text-sm text-slate-600">Todos adicionam/checagem em tempo real. Nada fica para trás.</p>
+        <div class="card">
+          <div class="card-icon orange">🛒</div>
+          <h3 class="card-title">Lista de compras colaborativa</h3>
+          <p class="card-description">Todos adicionam/checagem em tempo real. Nada fica para trás.</p>
         </div>
-        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
-          <div class="h-10 w-10 grid place-content-center rounded-lg bg-emerald-100 text-emerald-700 mb-3">👥</div>
-          <h3 class="font-semibold">Membros e avatares</h3>
-          <p class="mt-2 text-sm text-slate-600">Cores únicas por membro, convites fáceis e redistribuição automática ao remover alguém.</p>
+        <div class="card">
+          <div class="card-icon emerald">👥</div>
+          <h3 class="card-title">Membros e avatares</h3>
+          <p class="card-description">Cores únicas por membro, convites fáceis e redistribuição automática ao remover alguém.</p>
         </div>
-        <div class="p-6 bg-white border border-slate-200 rounded-2xl">
-          <div class="h-10 w-10 grid place-content-center rounded-lg bg-red-100 text-red-600 mb-3">⚠</div>
-          <h3 class="font-semibold">Recorrentes sem surpresas</h3>
-          <p class="mt-2 text-sm text-slate-600">Agenda de ocorrências, processamento em 1 clique e projeção futura no painel.</p>
+        <div class="card">
+          <div class="card-icon red">⚠</div>
+          <h3 class="card-title">Recorrentes sem surpresas</h3>
+          <p class="card-description">Agenda de ocorrências, processamento em 1 clique e projeção futura no painel.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Como funciona -->
-  <section id="como-funciona" class="py-16 lg:py-24 bg-white border-y border-slate-200">
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
-      <h2 class="text-3xl font-bold">Como funciona</h2>
-      <ol class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
-        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-          <h3 class="font-semibold">1) Cadastre sua família</h3>
-          <p class="mt-2 text-slate-600">Crie perfis, cores/avatares e permissões.</p>
+  <section id="como-funciona" class="section section-white">
+    <div class="container">
+      <h2 class="section-title">Como funciona</h2>
+      <ol class="steps">
+        <li class="step">
+          <h3 class="step-title">1) Cadastre sua família</h3>
+          <p class="step-description">Crie perfis, cores/avatares e permissões.</p>
         </li>
-        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-          <h3 class="font-semibold">2) Lance receitas e despesas</h3>
-          <p class="mt-2 text-slate-600">Detalhe quem pagou, categorias e divisão.</p>
+        <li class="step">
+          <h3 class="step-title">2) Lance receitas e despesas</h3>
+          <p class="step-description">Detalhe quem pagou, categorias e divisão.</p>
         </li>
-        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-          <h3 class="font-semibold">3) Veja o painel e projeções</h3>
-          <p class="mt-2 text-slate-600">Gráficos, tendências e acertos sugeridos.</p>
+        <li class="step">
+          <h3 class="step-title">3) Veja o painel e projeções</h3>
+          <p class="step-description">Gráficos, tendências e acertos sugeridos.</p>
         </li>
-        <li class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-          <h3 class="font-semibold">4) Automação com AI</h3>
-          <p class="mt-2 text-slate-600">Peça no chat: "crie despesa mercado R$200 amanhã".</p>
+        <li class="step">
+          <h3 class="step-title">4) Automação com AI</h3>
+          <p class="step-description">Peça no chat: "crie despesa mercado R$200 amanhã".</p>
         </li>
       </ol>
     </div>
   </section>
 
   <!-- Públicos / Casos de uso -->
-  <section id="publicos" class="py-16 lg:py-24">
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
-      <h2 class="text-3xl font-bold">Feito para você</h2>
-      <div class="mt-10 grid md:grid-cols-3 gap-6">
+  <section id="publicos" class="section">
+    <div class="container">
+      <h2 class="section-title">Feito para você</h2>
+      <div class="mt-10 grid-3">
         <!-- Individual -->
-        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
-          <h3 class="font-semibold text-lg">Pessoas (uso individual)</h3>
+        <div class="card">
+          <h3 class="card-title">Pessoas (uso individual)</h3>
           <ul class="mt-3 space-y-2 text-sm text-slate-700 list-disc list-inside">
             <li>Controle de rendimentos e despesas em um só lugar.</li>
             <li>Gráfico de balanço pessoal e modo "ocultar valores".</li>
@@ -312,8 +341,8 @@
           </ul>
         </div>
         <!-- Família -->
-        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
-          <h3 class="font-semibold text-lg">Famílias</h3>
+        <div class="card">
+          <h3 class="card-title">Famílias</h3>
           <ul class="mt-3 space-y-2 text-sm text-slate-700 list-disc list-inside">
             <li>Divisão flexível: igual, por percentual ou valores fixos.</li>
             <li>Acerto automático entre membros.</li>
@@ -321,8 +350,8 @@
           </ul>
         </div>
         <!-- Empresas / Educação financeira -->
-        <div class="p-6 rounded-2xl border border-slate-200 bg-white">
-          <h3 class="font-semibold text-lg">Empresas & Educação Financeira</h3>
+        <div class="card">
+          <h3 class="card-title">Empresas & Educação Financeira</h3>
           <ul class="mt-3 space-y-2 text-sm text-slate-700 list-disc list-inside">
             <li>Programas de bem‑estar financeiro para equipes.</li>
             <li>Conteúdos e exercícios guiados pelo Assistente AI.</li>
@@ -334,19 +363,19 @@
   </section>
 
   <!-- Recursos principais -->
-  <section id="recursos" class="py-16 lg:py-24 bg-white border-y border-slate-200">
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
-      <h2 class="text-3xl font-bold">Recursos que fazem diferença</h2>
-      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Despesas</strong>: título, valor, categoria, quem pagou, data e histórico.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Recorrentes</strong>: frequência, número de ocorrências e processamento em 1 clique.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Minha carteira</strong>: rendimentos e balanço pessoal com comparativos.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Membros</strong>: convites, avatares coloridos e redistribuição automática.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Agenda</strong>: mensal, semanal e lista com lembretes.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Anotações & Tarefas</strong>: colaboração, categorias e vínculo a despesas.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Assistente AI</strong>: atua com contexto do sistema; prompt personalizável.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Histórico & Auditoria</strong>: rastreabilidade total de ações.</div>
-        <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50"><strong>Fuso horário São Paulo</strong>: datas consistentes para toda a equipe.</div>
+  <section id="recursos" class="section section-white">
+    <div class="container">
+      <h2 class="section-title">Recursos que fazem diferença</h2>
+      <div class="mt-8 grid-3 text-sm">
+        <div class="card card-slate"><strong>Despesas</strong>: título, valor, categoria, quem pagou, data e histórico.</div>
+        <div class="card card-slate"><strong>Recorrentes</strong>: frequência, número de ocorrências e processamento em 1 clique.</div>
+        <div class="card card-slate"><strong>Minha carteira</strong>: rendimentos e balanço pessoal com comparativos.</div>
+        <div class="card card-slate"><strong>Membros</strong>: convites, avatares coloridos e redistribuição automática.</div>
+        <div class="card card-slate"><strong>Agenda</strong>: mensal, semanal e lista com lembretes.</div>
+        <div class="card card-slate"><strong>Anotações & Tarefas</strong>: colaboração, categorias e vínculo a despesas.</div>
+        <div class="card card-slate"><strong>Assistente AI</strong>: atua com contexto do sistema; prompt personalizável.</div>
+        <div class="card card-slate"><strong>Histórico & Auditoria</strong>: rastreabilidade total de ações.</div>
+        <div class="card card-slate"><strong>Fuso horário São Paulo</strong>: datas consistentes para toda a equipe.</div>
       </div>
     </div>
   </section>
@@ -1188,12 +1217,12 @@
   </section>
 
   <!-- Formulário de interesse -->
-  <section id="interesse" class="py-16 lg:py-24">
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg">
-      <div class="grid lg:grid-cols-2 gap-10 items-start">
+  <section id="interesse" class="section">
+    <div class="container">
+      <div class="grid-2">
         <div>
-          <h2 id="form-headline" class="text-3xl font-bold">Fale com a gente</h2>
-          <p class="mt-3 text-slate-600">Preencha e receba acesso prioritário, materiais de onboarding e condições especiais de lançamento.</p>
+          <h2 id="form-headline" class="section-title">Fale com a gente</h2>
+          <p class="section-description">Preencha e receba acesso prioritário, materiais de onboarding e condições especiais de lançamento.</p>
           <ul class="mt-6 space-y-3 text-sm text-slate-700 list-disc list-inside">
             <li>Material de educação financeira para equipes e famílias.</li>
             <li>Templates de categorias e metas por perfil.</li>
@@ -1201,40 +1230,40 @@
           </ul>
         </div>
 
-        <form id="leadForm" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm grid gap-4" novalidate>
-          <div>
-            <label class="block text-sm font-medium mb-1" for="nome">Nome</label>
-            <input id="nome" name="nome" type="text" required placeholder="Seu nome completo" class="w-full rounded-xl border-slate-300 focus:ring-emerald-500 focus:border-emerald-500" />
+        <form id="leadForm" class="form-container" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" required placeholder="Seu nome completo" class="form-input" />
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1" for="telefone">Telefone</label>
-            <input id="telefone" name="telefone" type="tel" required placeholder="(DDD) 90000-0000" pattern="^[0-9()\-\s+]{8,}$" class="w-full rounded-xl border-slate-300 focus:ring-emerald-500 focus:border-emerald-500" />
+          <div class="form-group">
+            <label class="form-label" for="telefone">Telefone</label>
+            <input id="telefone" name="telefone" type="tel" required placeholder="(DDD) 90000-0000" pattern="^[0-9()\-\s+]{8,}$" class="form-input" />
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1" for="email">E‑mail</label>
-            <input id="email" name="email" type="email" required placeholder="voce@exemplo.com" class="w-full rounded-xl border-slate-300 focus:ring-emerald-500 focus:border-emerald-500" />
+          <div class="form-group">
+            <label class="form-label" for="email">E‑mail</label>
+            <input id="email" name="email" type="email" required placeholder="voce@exemplo.com" class="form-input" />
           </div>
 
           <fieldset>
-            <legend class="block text-sm font-medium mb-2">Interesse</legend>
-            <div class="grid sm:grid-cols-3 gap-2">
-              <label class="flex items-center gap-2 rounded-xl border border-slate-300 p-3 cursor-pointer">
+            <legend class="form-label">Interesse</legend>
+            <div class="form-radio-group">
+              <label class="form-radio">
                 <input type="radio" name="tipo" value="pessoal" required>
                 <span>Pessoal</span>
               </label>
-              <label class="flex items-center gap-2 rounded-xl border border-slate-300 p-3 cursor-pointer">
+              <label class="form-radio">
                 <input type="radio" name="tipo" value="familiar">
                 <span>Familiar</span>
               </label>
-              <label class="flex items-center gap-2 rounded-xl border border-slate-300 p-3 cursor-pointer">
+              <label class="form-radio">
                 <input type="radio" name="tipo" value="empresa">
                 <span>Minha empresa</span>
               </label>
             </div>
           </fieldset>
 
-          <button type="submit" class="mt-2 px-6 py-3 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow hover:opacity-90">Enviar interesse</button>
-          <p id="formMsg" class="text-sm mt-1"></p>
+          <button type="submit" class="form-button">Enviar interesse</button>
+          <p id="formMsg" class="form-message"></p>
           <p class="text-xs text-slate-500">Ao enviar, você concorda em receber contato e materiais do MinhaGrana. Seus dados não serão compartilhados.</p>
         </form>
       </div>
@@ -1269,13 +1298,13 @@
     </div>
   </section>
 
-  <footer class="py-10 text-sm text-slate-600">
-    <div class="mx-auto container px-4 sm:px-6 lg:px-8 container-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+  <footer class="footer">
+    <div class="footer-content">
       <p>© <span id="year"></span> MinhaGrana • Todos os direitos reservados.</p>
-      <div class="flex items-center gap-4">
-        <a href="termos-de-uso.html" class="hover:text-slate-900">Termos</a>
-        <span class="text-slate-300">•</span>
-        <a href="politica-privacidade.html" class="hover:text-slate-900">Privacidade</a>
+      <div class="footer-links">
+        <a href="termos-de-uso.html">Termos</a>
+        <span class="footer-separator">•</span>
+        <a href="politica-privacidade.html">Privacidade</a>
       </div>
     </div>
   </footer>
@@ -1283,6 +1312,25 @@
   <script>
     // Ano dinâmico
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    
+    if (mobileMenuToggle && mainNav) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('open');
+        mobileMenuToggle.textContent = mainNav.classList.contains('open') ? '✕' : '☰';
+      });
+      
+      // Close menu when clicking on a link
+      mainNav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          mainNav.classList.remove('open');
+          mobileMenuToggle.textContent = '☰';
+        }
+      });
+    }
 
     // Registrar Service Worker para PWA
     if ('serviceWorker' in navigator) {
@@ -1474,13 +1522,16 @@
     }
   </script>
 
+  <!-- Form Handler -->
+  <script src="js/form-handler.js"></script>
+  
   <!-- A/B Testing -->
-  <script src="ab-testing.js"></script>
+  <script src="js/ab-testing.js"></script>
   
   <!-- Chat Support -->
-  <script src="chat-support.js"></script>
+  <script src="js/chat-support.js"></script>
   
   <!-- Advanced Animations -->
-  <script src="animations.js"></script>
+  <script src="js/animations.js"></script>
 </body>
 </html>

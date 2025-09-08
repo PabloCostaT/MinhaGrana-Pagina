@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente AI - MinhaGrana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .ai-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .ai-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .ai-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        
+        .ai-subtitle {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .chat-container {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+        
+        .chat-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 80%;
+        }
+        
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+        
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+        }
+        
+        .message-content {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .message.user .message-content {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #10b981;
+        }
+        
+        .message-text {
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+        }
+        
+        .message.user .message-time {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .suggestions {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #f1f5f9;
+            background: #f8fafc;
+        }
+        
+        .suggestions-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+        }
+        
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .suggestion-chip {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .suggestion-chip:hover {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+        
+        .input-container {
+            padding: 1.5rem;
+            border-top: 1px solid #f1f5f9;
+            background: white;
+        }
+        
+        .input-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+        
+        .message-input {
+            flex: 1;
+            min-height: 44px;
+            max-height: 120px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            resize: none;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+        
+        .message-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+        
+        .send-button {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .send-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            font-size: 0.875rem;
+            font-style: italic;
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+        
+        .typing-dot {
+            width: 4px;
+            height: 4px;
+            background: #64748b;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .ai-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .ai-action {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            color: #7c3aed;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .ai-action:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-container">
+        <div class="header">
+            <div class="ai-icon">🤖</div>
+            <div>
+                <h1 class="ai-title">Assistente AI</h1>
+                <p class="ai-subtitle">Sempre pronto para ajudar com suas finanças</p>
+            </div>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3 class="chat-title">Chat com o Assistente</h3>
+                <div class="chat-status">
+                    <div class="status-dot"></div>
+                    <span>Online e pronto para ajudar</span>
+                </div>
+            </div>
+            
+            <div class="messages">
+                <div class="message ai">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            Olá! Sou seu assistente financeiro pessoal. Posso ajudar você a:
+                            <br><br>
+                            • Criar despesas e receitas
+                            • Analisar seus gastos
+                            • Sugerir economias
+                            • Responder perguntas sobre finanças
+                            <br><br>
+                            Como posso ajudar hoje?
+                        </div>
+                        <div class="message-time">Agora</div>
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="message-avatar">JS</div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            Crie uma despesa de R$ 120 para mercado amanhã
+                        </div>
+                        <div class="message-time">14:32</div>
+                    </div>
+                </div>
+                
+                <div class="message ai">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            Perfeito! Criei a despesa para você:
+                            <br><br>
+                            <strong>Despesa criada:</strong>
+                            • Valor: R$ 120,00
+                            • Categoria: Alimentação
+                            • Data: Amanhã (15/01/2024)
+                            • Status: Pendente
+                            <br><br>
+                            A despesa foi adicionada ao seu orçamento mensal. Quer que eu ajuste alguma coisa?
+                        </div>
+                        <div class="message-time">14:33</div>
+                        <div class="ai-actions">
+                            <div class="ai-action">Editar despesa</div>
+                            <div class="ai-action">Ver orçamento</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="message-avatar">JS</div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            Como está meu orçamento este mês?
+                        </div>
+                        <div class="message-time">14:35</div>
+                    </div>
+                </div>
+                
+                <div class="message ai">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            Aqui está um resumo do seu orçamento de janeiro:
+                            <br><br>
+                            <strong>📊 Resumo Financeiro:</strong>
+                            • Receitas: R$ 7.200,00
+                            • Despesas: R$ 4.352,50
+                            • Saldo: R$ 2.847,50 ✅
+                            <br><br>
+                            <strong>🎯 Status das Metas:</strong>
+                            • Economia mensal: R$ 2.847,50 / R$ 2.500,00 (113% ✅)
+                            • Alimentação: R$ 1.245,80 / R$ 1.500,00 (83% ✅)
+                            • Transporte: R$ 680,00 / R$ 800,00 (85% ✅)
+                            <br><br>
+                            Você está indo muito bem! Já superou sua meta de economia mensal.
+                        </div>
+                        <div class="message-time">14:36</div>
+                        <div class="ai-actions">
+                            <div class="ai-action">Ver relatório completo</div>
+                            <div class="ai-action">Ajustar metas</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="typing-indicator">
+                    <div class="message-avatar">AI</div>
+                    <div>
+                        <span>Assistente está digitando</span>
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="suggestions">
+                <div class="suggestions-title">Sugestões rápidas:</div>
+                <div class="suggestion-chips">
+                    <div class="suggestion-chip">Criar despesa</div>
+                    <div class="suggestion-chip">Ver relatórios</div>
+                    <div class="suggestion-chip">Ajustar orçamento</div>
+                    <div class="suggestion-chip">Dicas de economia</div>
+                    <div class="suggestion-chip">Análise de gastos</div>
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        class="message-input" 
+                        placeholder="Digite sua mensagem..."
+                        rows="1"
+                    ></textarea>
+                    <button class="send-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

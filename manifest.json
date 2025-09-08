@@ -1,81 +1,161 @@
 {
   "name": "MinhaGrana - Organize as finanças da sua família",
   "short_name": "MinhaGrana",
-  "description": "Aplicação completa de gestão financeira e organização familiar: despesas, recorrentes, carteira, membros, lista de compras, agenda, tarefas e Assistente AI.",
+  "description": "MinhaGrana é uma aplicação completa de gestão financeira e organização familiar: despesas, recorrentes, carteira, membros, lista de compras, agenda, tarefas e Assistente AI.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ECFDF5",
+  "background_color": "#ffffff",
   "theme_color": "#10B981",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "pt-BR",
   "dir": "ltr",
-  "categories": ["finance", "productivity", "business"],
+  "categories": ["finance", "productivity", "utilities"],
   "icons": [
     {
       "src": "favicon-16x16.png",
       "sizes": "16x16",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "favicon-32x32.png",
       "sizes": "32x32",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "favicon-48x48.png",
       "sizes": "48x48",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "favicon-180x180.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "apple-touch-icon"
+      "purpose": "any"
     },
     {
       "src": "favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "screenshots": [
     {
-      "src": "screenshot-desktop.png",
+      "src": "screenshots/dashboard.html",
       "sizes": "1280x720",
-      "type": "image/png",
+      "type": "text/html",
       "form_factor": "wide",
-      "label": "MinhaGrana - Desktop View"
+      "label": "Dashboard principal do MinhaGrana"
     },
     {
-      "src": "screenshot-mobile.png",
-      "sizes": "375x667",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "MinhaGrana - Mobile View"
+      "src": "screenshots/ai-assistant.html",
+      "sizes": "1280x720",
+      "type": "text/html",
+      "form_factor": "wide",
+      "label": "Assistente AI para automação financeira"
+    },
+    {
+      "src": "screenshots/shopping-list.html",
+      "sizes": "1280x720",
+      "type": "text/html",
+      "form_factor": "wide",
+      "label": "Lista de compras colaborativa"
     }
   ],
   "shortcuts": [
     {
-      "name": "Fale Conosco",
-      "short_name": "Contato",
-      "description": "Entre em contato conosco",
-      "url": "/#interesse",
+      "name": "Nova Despesa",
+      "short_name": "Despesa",
+      "description": "Adicionar nova despesa rapidamente",
+      "url": "/?action=new-expense",
       "icons": [
         {
-          "src": "favicon-96x96.png",
-          "sizes": "96x96"
+          "src": "favicon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Assistente AI",
+      "short_name": "AI",
+      "description": "Abrir assistente de inteligência artificial",
+      "url": "/?action=ai-assistant",
+      "icons": [
+        {
+          "src": "favicon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Lista de Compras",
+      "short_name": "Compras",
+      "description": "Ver lista de compras compartilhada",
+      "url": "/?action=shopping-list",
+      "icons": [
+        {
+          "src": "favicon-192x192.png",
+          "sizes": "192x192"
         }
       ]
     }
   ],
   "related_applications": [],
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "capture_links": "new-client",
+  "file_handlers": [
+    {
+      "action": "/import",
+      "accept": {
+        "text/csv": [".csv"],
+        "application/vnd.ms-excel": [".xls"],
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+minhagrana",
+      "url": "/?action=%s"
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "files",
+          "accept": ["image/*", "text/csv", "application/pdf"]
+        }
+      ]
+    }
+  },
+  "features": [
+    "Cross Platform",
+    "fast",
+    "simple"
+  ],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7"
 }

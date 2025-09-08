@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Responsividade - MinhaGrana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .test-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+        
+        .test-description {
+            font-size: 1.125rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .device-tests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .device-test {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .device-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .device-icon {
+            font-size: 1.5rem;
+        }
+        
+        .test-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .test-info {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .responsive-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .responsive-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .responsive-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .responsive-description {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        .breakpoint-tests {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .breakpoint-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .breakpoint-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .breakpoint-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .breakpoint-size {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
+        
+        .breakpoint-device {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        .current-viewport {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            z-index: 1000;
+        }
+        
+        .test-iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 1rem;
+            }
+            
+            .test-title {
+                font-size: 2rem;
+            }
+            
+            .device-tests {
+                grid-template-columns: 1fr;
+            }
+            
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .breakpoint-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .current-viewport {
+                position: static;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .test-title {
+                font-size: 1.75rem;
+            }
+            
+            .test-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="current-viewport" id="viewport-info">
+        Viewport: <span id="viewport-size"></span>
+    </div>
+    
+    <div class="test-container">
+        <div class="test-header">
+            <h1 class="test-title">Teste de Responsividade</h1>
+            <p class="test-description">
+                Teste a landing page do MinhaGrana em diferentes dispositivos e resoluções para garantir uma experiência perfeita em todos os tamanhos de tela.
+            </p>
+        </div>
+        
+        <div class="device-tests">
+            <div class="device-test">
+                <h3 class="device-title">
+                    <span class="device-icon">📱</span>
+                    Mobile (375px)
+                </h3>
+                <button class="test-button" onclick="testViewport(375, 667)">
+                    Testar Mobile
+                </button>
+                <p class="test-info">
+                    Teste a experiência em smartphones com tela de 375px de largura, simulando um iPhone SE ou similar.
+                </p>
+            </div>
+            
+            <div class="device-test">
+                <h3 class="device-title">
+                    <span class="device-icon">📱</span>
+                    Mobile Large (414px)
+                </h3>
+                <button class="test-button" onclick="testViewport(414, 896)">
+                    Testar Mobile Large
+                </button>
+                <p class="test-info">
+                    Teste em smartphones maiores como iPhone 11 Pro Max ou Samsung Galaxy S20+.
+                </p>
+            </div>
+            
+            <div class="device-test">
+                <h3 class="device-title">
+                    <span class="device-icon">📱</span>
+                    Tablet (768px)
+                </h3>
+                <button class="test-button" onclick="testViewport(768, 1024)">
+                    Testar Tablet
+                </button>
+                <p class="test-info">
+                    Teste a experiência em tablets como iPad em modo retrato.
+                </p>
+            </div>
+            
+            <div class="device-test">
+                <h3 class="device-title">
+                    <span class="device-icon">💻</span>
+                    Desktop (1024px)
+                </h3>
+                <button class="test-button" onclick="testViewport(1024, 768)">
+                    Testar Desktop
+                </button>
+                <p class="test-info">
+                    Teste em laptops e desktops menores com resolução 1024x768.
+                </p>
+            </div>
+            
+            <div class="device-test">
+                <h3 class="device-title">
+                    <span class="device-icon">🖥️</span>
+                    Desktop Large (1440px)
+                </h3>
+                <button class="test-button" onclick="testViewport(1440, 900)">
+                    Testar Desktop Large
+                </button>
+                <p class="test-info">
+                    Teste em monitores maiores com resolução 1440x900 ou superior.
+                </p>
+            </div>
+            
+            <div class="device-test">
+                <h3 class="device-title">
+                    <span class="device-icon">🖥️</span>
+                    Ultra Wide (1920px)
+                </h3>
+                <button class="test-button" onclick="testViewport(1920, 1080)">
+                    Testar Ultra Wide
+                </button>
+                <p class="test-info">
+                    Teste em monitores ultra-wide com resolução 1920x1080 ou superior.
+                </p>
+            </div>
+        </div>
+        
+        <div class="responsive-grid">
+            <div class="responsive-item">
+                <div class="responsive-icon">📱</div>
+                <h4 class="responsive-title">Mobile First</h4>
+                <p class="responsive-description">Design otimizado para dispositivos móveis com navegação simplificada</p>
+            </div>
+            
+            <div class="responsive-item">
+                <div class="responsive-icon">⚡</div>
+                <h4 class="responsive-title">Performance</h4>
+                <p class="responsive-description">Carregamento rápido em todas as conexões e dispositivos</p>
+            </div>
+            
+            <div class="responsive-item">
+                <div class="responsive-icon">👆</div>
+                <h4 class="responsive-title">Touch Friendly</h4>
+                <p class="responsive-description">Botões e elementos otimizados para interação touch</p>
+            </div>
+            
+            <div class="responsive-item">
+                <div class="responsive-icon">🎨</div>
+                <h4 class="responsive-title">Adaptativo</h4>
+                <p class="responsive-description">Layout que se adapta perfeitamente a qualquer tela</p>
+            </div>
+        </div>
+        
+        <div class="breakpoint-tests">
+            <h3 class="breakpoint-title">Breakpoints Testados</h3>
+            <div class="breakpoint-list">
+                <div class="breakpoint-item">
+                    <div class="breakpoint-size">320px - 480px</div>
+                    <div class="breakpoint-device">Mobile Small</div>
+                </div>
+                <div class="breakpoint-item">
+                    <div class="breakpoint-size">481px - 768px</div>
+                    <div class="breakpoint-device">Mobile Large</div>
+                </div>
+                <div class="breakpoint-item">
+                    <div class="breakpoint-size">769px - 1024px</div>
+                    <div class="breakpoint-device">Tablet</div>
+                </div>
+                <div class="breakpoint-item">
+                    <div class="breakpoint-size">1025px - 1440px</div>
+                    <div class="breakpoint-device">Desktop</div>
+                </div>
+                <div class="breakpoint-item">
+                    <div class="breakpoint-size">1441px+</div>
+                    <div class="breakpoint-device">Desktop Large</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="test-iframe-container" style="display: none;">
+            <h3 style="text-align: center; margin-bottom: 1rem;">Preview da Landing Page</h3>
+            <iframe id="test-iframe" class="test-iframe" src="landing_page_html.html"></iframe>
+        </div>
+    </div>
+    
+    <script>
+        // Update viewport info
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const viewportSize = document.getElementById('viewport-size');
+            viewportSize.textContent = `${width} x ${height}`;
+        }
+        
+        // Test specific viewport
+        function testViewport(width, height) {
+            const container = document.getElementById('test-iframe-container');
+            const iframe = document.getElementById('test-iframe');
+            
+            // Show iframe container
+            container.style.display = 'block';
+            
+            // Set iframe size
+            iframe.style.width = `${Math.min(width, window.innerWidth - 40)}px`;
+            iframe.style.height = `${Math.min(height, window.innerHeight - 200)}px`;
+            
+            // Scroll to iframe
+            container.scrollIntoView({ behavior: 'smooth' });
+            
+            // Update viewport info
+            document.getElementById('viewport-size').textContent = `${width} x ${height} (Teste)`;
+        }
+        
+        // Initialize
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+        
+        // Test all breakpoints automatically
+        function runAllTests() {
+            const tests = [
+                { width: 375, height: 667, name: 'Mobile' },
+                { width: 414, height: 896, name: 'Mobile Large' },
+                { width: 768, height: 1024, name: 'Tablet' },
+                { width: 1024, height: 768, name: 'Desktop' },
+                { width: 1440, height: 900, name: 'Desktop Large' },
+                { width: 1920, height: 1080, name: 'Ultra Wide' }
+            ];
+            
+            let currentTest = 0;
+            
+            function runNextTest() {
+                if (currentTest < tests.length) {
+                    const test = tests[currentTest];
+                    console.log(`Testando ${test.name}: ${test.width}x${test.height}`);
+                    testViewport(test.width, test.height);
+                    currentTest++;
+                    setTimeout(runNextTest, 3000); // Wait 3 seconds between tests
+                }
+            }
+            
+            runNextTest();
+        }
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch (e.key) {
+                    case '1':
+                        e.preventDefault();
+                        testViewport(375, 667);
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        testViewport(414, 896);
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        testViewport(768, 1024);
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        testViewport(1024, 768);
+                        break;
+                    case '5':
+                        e.preventDefault();
+                        testViewport(1440, 900);
+                        break;
+                    case '6':
+                        e.preventDefault();
+                        testViewport(1920, 1080);
+                        break;
+                    case 'a':
+                        e.preventDefault();
+                        runAllTests();
+                        break;
+                }
+            }
+        });
+        
+        // Add test results logging
+        function logTestResult(viewport, issues) {
+            console.log(`Teste ${viewport}:`, issues.length === 0 ? '✅ Passou' : '❌ Falhou', issues);
+        }
+        
+        // Simulate common issues
+        function checkCommonIssues() {
+            const issues = [];
+            const width = window.innerWidth;
+            
+            // Check for horizontal scroll
+            if (document.body.scrollWidth > width) {
+                issues.push('Scroll horizontal detectado');
+            }
+            
+            // Check for small touch targets
+            const buttons = document.querySelectorAll('button, .cta-button, .hero-button-primary');
+            buttons.forEach(button => {
+                const rect = button.getBoundingClientRect();
+                if (rect.width < 44 || rect.height < 44) {
+                    issues.push('Botão muito pequeno para touch');
+                }
+            });
+            
+            // Check for text readability
+            const smallText = document.querySelectorAll('p, span, div');
+            smallText.forEach(element => {
+                const style = window.getComputedStyle(element);
+                const fontSize = parseFloat(style.fontSize);
+                if (fontSize < 14 && width < 768) {
+                    issues.push('Texto muito pequeno em mobile');
+                }
+            });
+            
+            return issues;
+        }
+        
+        // Run checks when iframe loads
+        document.getElementById('test-iframe').addEventListener('load', () => {
+            setTimeout(() => {
+                const issues = checkCommonIssues();
+                logTestResult('Current Viewport', issues);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
