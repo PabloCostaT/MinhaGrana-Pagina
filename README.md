@@ -58,12 +58,15 @@ Uma landing page completa e moderna para o MinhaGrana, aplicação de gestão fi
 
 ```
 MinhaGrana-Pagina/
-├── landing_page_html.html          # Landing page principal
+├── index.html                      # Landing page principal
 ├── styles.css                      # Estilos CSS completos
 ├── manifest.json                   # PWA manifest
 ├── sw.js                          # Service Worker
 ├── responsive-test.html           # Teste de responsividade
 ├── README.md                      # Este arquivo
+├── DEPLOY.md                      # Guia de deploy
+├── netlify.toml                   # Configuração Netlify
+├── vercel.json                    # Configuração Vercel
 ├── api/
 │   └── contact.php               # Backend PHP para formulários
 ├── js/
@@ -91,6 +94,8 @@ npx serve .
 # Usando PHP
 php -S localhost:8000
 ```
+
+Acesse: `http://localhost:8000` (o arquivo `index.html` será servido automaticamente)
 
 ### 2. Configuração do Backend
 
@@ -187,20 +192,28 @@ Personalize em `manifest.json`:
 
 ## 🚀 Deploy
 
-### Netlify
-1. Conecte seu repositório
-2. Configure build settings
-3. Deploy automático
+### Netlify (Recomendado)
+1. **Conecte seu repositório** no [netlify.com](https://netlify.com)
+2. **Build settings**:
+   - Build command: (deixe vazio)
+   - Publish directory: `.` (raiz)
+3. **Deploy automático** a cada push
+4. **Configuração**: O arquivo `netlify.toml` já está configurado
 
 ### Vercel
-1. Instale Vercel CLI
-2. Execute `vercel`
-3. Siga as instruções
+1. **Via CLI**: `npx vercel`
+2. **Via Dashboard**: Importe repositório no [vercel.com](https://vercel.com)
+3. **Configuração**: O arquivo `vercel.json` já está configurado
 
 ### GitHub Pages
 1. Ative GitHub Pages no repositório
 2. Selecione branch main
 3. Acesse via `username.github.io/repository-name`
+
+### Outras Opções
+- **Firebase Hosting**: `firebase deploy`
+- **Surge.sh**: `surge`
+- **Qualquer servidor web**: Apenas faça upload dos arquivos
 
 ## 📱 Testes
 

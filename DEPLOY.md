@@ -15,6 +15,8 @@
    Build command: (deixe vazio)
    Publish directory: . (raiz do projeto)
    ```
+   
+   **Importante**: O arquivo `index.html` na raiz será servido automaticamente como página inicial.
 
 3. **Variáveis de ambiente** (opcional):
    ```
@@ -49,6 +51,8 @@ vercel
    - Framework: Other
    - Build Command: (deixe vazio)
    - Output Directory: .
+   
+   **Nota**: O Vercel detectará automaticamente o `index.html` na raiz.
 
 ### 3. GitHub Pages
 

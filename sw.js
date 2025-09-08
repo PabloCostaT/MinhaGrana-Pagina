@@ -8,7 +8,7 @@ const DYNAMIC_CACHE_NAME = 'minhagrana-dynamic-v1.0.0';
 // Assets to cache immediately
 const STATIC_ASSETS = [
   '/',
-  '/landing_page_html.html',
+  '/index.html',
   '/styles.css',
   '/js/form-handler.js',
   '/favicon-16x16.png',
@@ -123,7 +123,7 @@ self.addEventListener('fetch', (event) => {
             
             // Return offline page for navigation requests
             if (request.mode === 'navigate') {
-              return caches.match('/landing_page_html.html');
+              return caches.match('/index.html');
             }
             
             // Return a generic offline response for other requests
