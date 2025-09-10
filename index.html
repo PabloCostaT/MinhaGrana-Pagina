@@ -1092,126 +1092,17 @@
           </div>
         </div>
 
-        <!-- Formulário de Afiliado -->
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg p-8">
-          <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-              <span class="text-white text-2xl">🛡️</span>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Suporte Dedicado</h3>
-            <p class="text-sm text-slate-600">Equipe especializada para ajudar você a maximizar seus ganhos.</p>
+        <!-- CTA para Afiliados -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-lg p-8 text-center">
+          <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+            <span class="text-white text-2xl">🛡️</span>
           </div>
-          
-          <h3 class="text-2xl font-bold mb-6 text-center">Torne-se um Afiliado</h3>
-          
-          <form id="affiliateForm" class="space-y-4" novalidate>
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Nome Completo *</label>
-              <input type="text" name="nome" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all" placeholder="Seu nome completo">
-              <div class="error-message text-red-600 text-xs mt-1 hidden"></div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Email *</label>
-              <input type="email" name="email" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all" placeholder="seu@email.com">
-              <div class="error-message text-red-600 text-xs mt-1 hidden"></div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Telefone *</label>
-              <input type="tel" name="telefone" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all" placeholder="(11) 99999-9999" pattern="^[0-9()\-\s+]{8,}$">
-              <div class="error-message text-red-600 text-xs mt-1 hidden"></div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Como conheceu o MinhaGrana? *</label>
-              <select name="origem" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
-                <option value="">Selecione uma opção</option>
-                <option value="google">Google</option>
-                <option value="facebook">Facebook</option>
-                <option value="instagram">Instagram</option>
-                <option value="youtube">YouTube</option>
-                <option value="tiktok">TikTok</option>
-                <option value="linkedin">LinkedIn</option>
-                <option value="indicacao">Indicação de amigo</option>
-                <option value="blog">Blog/Site</option>
-                <option value="outro">Outro</option>
-              </select>
-              <div class="error-message text-red-600 text-xs mt-1 hidden"></div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Área de Atuação *</label>
-              <select name="area" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
-                <option value="">Selecione uma opção</option>
-                <option value="influencer">Influencer Digital</option>
-                <option value="youtuber">YouTuber</option>
-                <option value="blogger">Blogger</option>
-                <option value="coach">Coach Financeiro</option>
-                <option value="empresario">Empresário</option>
-                <option value="educador">Educador Financeiro</option>
-                <option value="consultor">Consultor</option>
-                <option value="outro">Outro</option>
-              </select>
-              <div class="error-message text-red-600 text-xs mt-1 hidden"></div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Número de Seguidores *</label>
-              <select name="seguidores" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
-                <option value="">Selecione uma opção</option>
-                <option value="0-1000">0 - 1.000</option>
-                <option value="1000-10000">1.000 - 10.000</option>
-                <option value="10000-50000">10.000 - 50.000</option>
-                <option value="50000-100000">50.000 - 100.000</option>
-                <option value="100000-500000">100.000 - 500.000</option>
-                <option value="500000+">500.000+</option>
-              </select>
-              <div class="error-message text-red-600 text-xs mt-1 hidden"></div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Plataformas onde atua</label>
-              <div class="grid grid-cols-2 gap-3 mt-2">
-                <label class="flex items-center p-2 rounded-lg border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer">
-                  <input type="checkbox" name="plataformas" value="instagram" class="mr-3 w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded">
-                  <span class="text-sm font-medium">Instagram</span>
-                </label>
-                <label class="flex items-center p-2 rounded-lg border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer">
-                  <input type="checkbox" name="plataformas" value="youtube" class="mr-3 w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded">
-                  <span class="text-sm font-medium">YouTube</span>
-                </label>
-                <label class="flex items-center p-2 rounded-lg border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer">
-                  <input type="checkbox" name="plataformas" value="tiktok" class="mr-3 w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded">
-                  <span class="text-sm font-medium">TikTok</span>
-                </label>
-                <label class="flex items-center p-2 rounded-lg border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer">
-                  <input type="checkbox" name="plataformas" value="facebook" class="mr-3 w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded">
-                  <span class="text-sm font-medium">Facebook</span>
-                </label>
-                <label class="flex items-center p-2 rounded-lg border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer">
-                  <input type="checkbox" name="plataformas" value="linkedin" class="mr-3 w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded">
-                  <span class="text-sm font-medium">LinkedIn</span>
-                </label>
-                <label class="flex items-center p-2 rounded-lg border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer">
-                  <input type="checkbox" name="plataformas" value="blog" class="mr-3 w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded">
-                  <span class="text-sm font-medium">Blog/Site</span>
-                </label>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-slate-700 mb-2">Conte-nos sobre você</label>
-              <textarea name="sobre" rows="4" placeholder="Fale sobre sua experiência, público-alvo e como pretende promover o MinhaGrana..." class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all resize-none"></textarea>
-            </div>
-
-            <button type="submit" class="w-full px-6 py-4 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg hover:opacity-90 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
-              <span class="submit-text">Quero ser um Afiliado</span>
-              <span class="loading-text hidden">Enviando...</span>
-            </button>
-          </form>
-
-          <div id="affiliateMsg" class="mt-4 text-sm text-center"></div>
+          <h3 class="text-2xl font-bold mb-4">Suporte Dedicado</h3>
+          <p class="text-slate-600 mb-6">Equipe especializada para ajudar você a maximizar seus ganhos como afiliado.</p>
+          <a href="#interesse" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg hover:opacity-90 transition-all font-semibold">
+            <span>Quero ser um Afiliado</span>
+            <span>→</span>
+          </a>
         </div>
       </div>
 
@@ -1279,6 +1170,10 @@
               <label class="form-radio">
                 <input type="radio" name="tipo" value="empresa">
                 <span>Minha empresa</span>
+              </label>
+              <label class="form-radio">
+                <input type="radio" name="tipo" value="afiliado">
+                <span>Quero ser Afiliado</span>
               </label>
             </div>
           </fieldset>
@@ -1408,6 +1303,15 @@
           value: 1
         });
         
+        // Tracking específico para afiliados
+        if (data.tipo === 'afiliado') {
+          gtag('event', 'affiliate_application', {
+            event_category: 'engagement',
+            event_label: 'affiliate_interest',
+            value: 1
+          });
+        }
+        
         form.reset();
       } catch (err) {
         msg.textContent = err.message || 'Ops! Não foi possível enviar agora. Tente novamente ou fale com nosso suporte.';
@@ -1479,216 +1383,6 @@
       }
     });
 
-    // Formulário de Afiliados
-    const affiliateForm = document.getElementById('affiliateForm');
-    const affiliateMsg = document.getElementById('affiliateMsg');
-    
-    if (affiliateForm) {
-      // Função para limpar erros
-      function clearErrors() {
-        const errorMessages = affiliateForm.querySelectorAll('.error-message');
-        errorMessages.forEach(msg => {
-          msg.classList.add('hidden');
-          msg.textContent = '';
-        });
-        
-        const inputs = affiliateForm.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-          input.classList.remove('border-red-500');
-          input.classList.add('border-slate-300');
-        });
-      }
-
-      // Função para mostrar erro em campo específico
-      function showFieldError(fieldName, message) {
-        const field = affiliateForm.querySelector(`[name="${fieldName}"]`);
-        const errorDiv = field.parentElement.querySelector('.error-message');
-        
-        if (field && errorDiv) {
-          field.classList.remove('border-slate-300');
-          field.classList.add('border-red-500');
-          errorDiv.textContent = message;
-          errorDiv.classList.remove('hidden');
-        }
-      }
-
-      // Validação em tempo real
-      const requiredFields = ['nome', 'email', 'telefone', 'origem', 'area', 'seguidores'];
-      
-      requiredFields.forEach(fieldName => {
-        const field = affiliateForm.querySelector(`[name="${fieldName}"]`);
-        if (field) {
-          field.addEventListener('blur', function() {
-            if (!this.value.trim()) {
-              showFieldError(fieldName, 'Este campo é obrigatório');
-            } else {
-              const errorDiv = this.parentElement.querySelector('.error-message');
-              if (errorDiv) {
-                errorDiv.classList.add('hidden');
-                this.classList.remove('border-red-500');
-                this.classList.add('border-slate-300');
-              }
-            }
-          });
-
-          field.addEventListener('input', function() {
-            if (this.value.trim()) {
-              const errorDiv = this.parentElement.querySelector('.error-message');
-              if (errorDiv) {
-                errorDiv.classList.add('hidden');
-                this.classList.remove('border-red-500');
-                this.classList.add('border-slate-300');
-              }
-            }
-          });
-        }
-      });
-
-      // Validação de email
-      const emailField = affiliateForm.querySelector('[name="email"]');
-      if (emailField) {
-        emailField.addEventListener('blur', function() {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (this.value.trim() && !emailRegex.test(this.value)) {
-            showFieldError('email', 'Por favor, insira um email válido');
-          }
-        });
-      }
-
-      // Validação de telefone
-      const phoneField = affiliateForm.querySelector('[name="telefone"]');
-      if (phoneField) {
-        phoneField.addEventListener('input', function() {
-          // Remove caracteres não numéricos
-          let value = this.value.replace(/\D/g, '');
-          
-          // Formata o telefone
-          if (value.length <= 10) {
-            value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-          } else {
-            value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-          }
-          
-          this.value = value;
-        });
-      }
-
-      affiliateForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        clearErrors();
-        
-        const submitButton = affiliateForm.querySelector('button[type="submit"]');
-        const submitText = submitButton.querySelector('.submit-text');
-        const loadingText = submitButton.querySelector('.loading-text');
-        
-        // Mostrar estado de carregamento
-        submitButton.disabled = true;
-        submitText.classList.add('hidden');
-        loadingText.classList.remove('hidden');
-        
-        const formData = new FormData(affiliateForm);
-        const data = {
-          nome: formData.get('nome')?.trim(),
-          email: formData.get('email')?.trim(),
-          telefone: formData.get('telefone')?.trim(),
-          origem: formData.get('origem'),
-          area: formData.get('area'),
-          seguidores: formData.get('seguidores'),
-          plataformas: formData.getAll('plataformas'),
-          sobre: formData.get('sobre')?.trim(),
-          tipo: 'afiliado'
-        };
-
-        // Validação completa
-        let hasErrors = false;
-        
-        if (!data.nome) {
-          showFieldError('nome', 'Nome é obrigatório');
-          hasErrors = true;
-        }
-        
-        if (!data.email) {
-          showFieldError('email', 'Email é obrigatório');
-          hasErrors = true;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-          showFieldError('email', 'Por favor, insira um email válido');
-          hasErrors = true;
-        }
-        
-        if (!data.telefone) {
-          showFieldError('telefone', 'Telefone é obrigatório');
-          hasErrors = true;
-        } else if (data.telefone.replace(/\D/g, '').length < 10) {
-          showFieldError('telefone', 'Telefone deve ter pelo menos 10 dígitos');
-          hasErrors = true;
-        }
-        
-        if (!data.origem) {
-          showFieldError('origem', 'Por favor, selecione como conheceu o MinhaGrana');
-          hasErrors = true;
-        }
-        
-        if (!data.area) {
-          showFieldError('area', 'Por favor, selecione sua área de atuação');
-          hasErrors = true;
-        }
-        
-        if (!data.seguidores) {
-          showFieldError('seguidores', 'Por favor, selecione o número de seguidores');
-          hasErrors = true;
-        }
-
-        if (hasErrors) {
-          // Restaurar estado do botão
-          submitButton.disabled = false;
-          submitText.classList.remove('hidden');
-          loadingText.classList.add('hidden');
-          
-          affiliateMsg.textContent = 'Por favor, corrija os erros acima.';
-          affiliateMsg.className = 'mt-4 text-sm text-center text-red-600';
-          return;
-        }
-
-        try {
-          // Enviar para o backend
-          const resp = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-          });
-          
-          const result = await resp.json();
-          
-          if (!resp.ok) {
-            throw new Error(result.message || 'Falha no envio');
-          }
-
-          affiliateMsg.textContent = '🎉 Obrigado! Recebemos sua solicitação de afiliado. Entraremos em contato em até 24 horas.';
-          affiliateMsg.className = 'mt-4 text-sm text-center text-emerald-700 bg-emerald-50 p-3 rounded-lg';
-          affiliateForm.reset();
-          
-          // Tracking
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'affiliate_application', {
-              event_category: 'engagement',
-              event_label: 'affiliate_form',
-              value: 1
-            });
-          }
-          
-        } catch (err) {
-          affiliateMsg.textContent = '❌ ' + (err.message || 'Ops! Não foi possível enviar agora. Tente novamente.');
-          affiliateMsg.className = 'mt-4 text-sm text-center text-red-600 bg-red-50 p-3 rounded-lg';
-        } finally {
-          // Restaurar estado do botão
-          submitButton.disabled = false;
-          submitText.classList.remove('hidden');
-          loadingText.classList.add('hidden');
-        }
-      });
-    }
   </script>
 
   <!-- Form Handler -->
