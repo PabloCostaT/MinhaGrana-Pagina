@@ -770,6 +770,7 @@ nav a:hover {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-bottom: 1rem;
+  display: block;
 }
 
 .form-button:hover {
@@ -783,6 +784,15 @@ nav a:hover {
   padding: 0.75rem;
   border-radius: 8px;
   text-align: center;
+}
+
+/* Fieldset spacing to prevent overlap with the submit button */
+fieldset {
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
 }
 
 /* Testimonials */
